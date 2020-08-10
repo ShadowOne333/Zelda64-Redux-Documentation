@@ -1,0 +1,137 @@
+//------------------------------------------------------------------
+//	Area title cards
+//------------------------------------------------------------------
+
+NOTE: ALL NEW AREA TITLES HAVE BEEN TAKEN FROM UNUSED TEXT IN THE JAPANESE RELEASE COMBINED WITH THOSE FROM SUBSEQUENT RELEASES (LIKE MAJORA'S MASK 3D).
+
+//----- New text IDs for area titles (and repointing)
+(Addresses for v1.0 US MM)
+
+To add new title ids, we need to check the message entry table starting at 0xC5D0D8, 0x90E0 in length.
+
+Each entry has the following format:
+
+XX XX 00 00 08 YY YY YY
+
+XX XX = Message number (ID in Hex) 
+YY YY YY = Offset where the message is located. This offset is relative to the start of the message bank, which begins at 0xAD1000, so the numbers specified here sum up to that address to locate the starting point of the text.
+
+The test will begin by reusing the entry for unused message 000B, and try moving the new text at the end of the table. Modify the DMA Table for the new text bank length, and recalculate CRC to make the ROM run in emulator.
+
+
+
+DMA Table (0x01A6D0) to allow for more text space:
+00 AD 10 00 00 B3 A9 F0 -> 00 AD 10 00 00 B3 AC A0
+
+Import "mm_message_data_static" at address 0xAD1000
+Should be 0x069CA0 bytes in length, ending at 0xB3ACA0
+
+Import the "mm_table" file at 0xC5D0D8.
+Should be 0x8F70 bytes in length, ending at 0xC66048
+
+
+
+BARN:
+// IGNORE!!! 0xC5D120 (Change text ID $0B pointer to new one):
+// 00 0B 00 00 08 00 03 10 -> 00 0B 00 00 08 06 A9 E0
+
+0xC5A2D0 (Add new Z2_OMOYA_BARN scene in Scene table as Entry $0F, and define its message ID for the area title as $0B): WORKING
+00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 -> 
+01 FC D0 00 01 FD 88 10 00 0B 00 00 00 00 00 00
+0xC5A918 (Modify Z2_OMOYA scene entry for the Barn for a new scene Z2_OMOYA_BARN and make it use an area title): WORKING
+10 00 01 02 -> 0F 00 41 02
+
+
+ZORA SHOP:
+// IGNORE!!! 0xC5D158 (Change text ID $12 pointer to new one):
+// 00 12 00 00 08 00 05 54 -> 00 12 00 00 08 06 9A 01
+
+0xC5A6A0 (Makes Scene Z2_BANDROOM use text ID $12):
+02 0A 00 00 02 A0 B8 B0 00 00 00 01 -> 02 0A 00 00 02 A0 B8 B0 00 12 00 01
+0xC5B4D8 (Make the scene use an area title):
+4C 05 01 02 -> 4C 05 41 02
+
+
+DEKU SCRUB PLAYGROUND:
+// IGNORE!!! 0xC5D160 (Change text ID $13 pointer to new one):
+// 00 13 00 00 08 00 05 60 -> 00 13 00 00 08 06 9A 16
+
+0xC5A3C0 (Makes Scene Z2_DEKUTES use text ID $13):
+02 2A 80 00 02 2B 0E 90 00 00 00 01 -> 02 2A 80 00 02 2B 0E 90 00 13 00 01
+0xC5AC98 (Make the scene use an area title):
+1E 00 01 02 -> 1E 01 41 02
+
+
+LONE PEAK SHRINE (UNKNOWN SCENE/ENTRANCE!):
+// IGNORE!!! 0xC5D220 (Change text ID $2B pointer to new one):
+// 00 2B 00 00 08 00 11 3C -> 00 2B 00 00 08 06 9A 37
+
+0xC5A250 (Makes Scene KAKUSIANA [Grottos] use text ID $10):
+02 E9 50 00 02 EA 4C D0 00 00 00 01 -> 02 E9 50 00 02 EA 4C D0 00 10 00 01
+0xC5BA30 (Make the scene use an area title):
+07 10 01 02 -> 07 10 41 02
+
+
+
+
+
+
+
+// ---- EXTRA DOCUMENTATION! THE FOLLOWING IS NOT REQUIRED FOR IMPLEMENTATION
+
+Each area is treated as an Entrance or "Scene" when entered from certain areas.
+Also, each Scene in itself calls for a specific text message ID for the area titles, which are all within message IDs 100-150.
+All scenes are listed here:
+https://wiki.cloudmodding.com/mm/Scene_Table#Internal_Scene_Table
+And the individual entrance entries:
+https://wiki.cloudmodding.com/mm/Entrance_List_(U_1.0)
+
+The "Variable" flag in the Entrance List enables the purple title card if set to 0x40. So basically adding 0x40 to whatever byte is there, enables an area title for that particular entrance.
+
+Entrances to add area title to:
+Great Bay/Zora Coast/Zora Cape:	Z2_31MISAKI (Entrance Index 00, 01, 0A, 0B)
+
+Zora Shop:			Z2_BANDROOM (Entrance Index 05)
+
+Deku Scrub Playground:		Z2_DEKUTES (Entrance Index 00)
+
+Romani Ranch Barn:		(Non existent) / Part of Z2_OMOYA (Entrance Index 00)
+
+Problem with the Romani Ranch entry is that it uses the same Scene entry for both Mama's House and the Barn, so it would end up using the "Mama's House" title for the Barn. We could work around this by using one of the "null" Scene entries from the table, perhaps 0F as it's the closest to the one for Mama's House (Entry 10). The exact Entrance entry from scene "OMOYA" for the Barn is [10 00 01 02]. By changing it to something like [0F 00 41 02] could make the Barn have a unique area title, we just need to also make the appropriate change in the Scene table. 
+
+To modify the Scene table entry 0F properly for this:
+01 FC D0 00 01 FD 88 10 01 33 00 00 00 00 00 00
+
+
+Message ID 	| US text		| Japanese text
+
+0128 		(Lone Peak Shrine)	離れ山のほこら
+0133		(Cow shed / Barn)	牛小屋
+013C 		(Zora Shop)		ゾーラの店 
+
+Unused "Great Bay" message ID from a cutscene (Repurpose for Zora Cape):
+0139 		Great Bay 		グレートベイ	(0x0A26AEF)
+????		Deku Scrub Playground	(From Majora's Mask 3D)
+
+HOW TO ADD/CHANGE AREA TITLES:
+To add an area title to the Entrance from Great Bay Coast -> Zora Cape, we need to first change the message ID for that Scene from the scene table. Let's take the info here as base:
+https://wiki.cloudmodding.com/mm/Scene_Table#Internal_Scene_Table
+
+The table begins at C5A1E0 in a v1.0 Decompressed ROM.
+From there, we need to look at the table for v1.0:
+https://wiki.cloudmodding.com/mm/Scene_Table/Internal/U_1.0
+
+Locate the Zora Cape Scene in that table, which is entry 35 beginning with 02 6F C0 00 in Hex (Hex search in the ROM, entry at 0xBAA080 in Redux decompressed, changes for vanilla MM).
+Once the entry is located, we need to find the message id which calls the title for it, which is 01 34. We modify an unused text title "Great Bay" which goes unused in a cutscene, and put "Zora Cape" in its place.
+
+Now that the Scene entry is modified, we need to change the Entrance table for it, based on this list:
+https://wiki.cloudmodding.com/mm/Entrance_List_(U_1.0)#.2835.29.09Z2_31MISAKI
+
+From there, the part of importance to us to add an area title is the value in the "Variable" column.
+Only the values that have the 3rd bit set (0100, or 0x40 in hex), show up an area title.
+The direct entrance from Coast -> Cape is the first two entries (Index 00 and 01) and their "Variable" 8A values in the table. We need to change those two values to "CA" instead.
+
+So now with those two changes, entering the area now shows "Zora Cape" with the proper purple area title.
+Changing the values for Indexes 0A and 0B from 01 to 41 adds the area title from Fairy Fountain -> Zora Cape.
+
+NOTE: Lone Peak Shrine is the shrine in Snowhead where you get the Lens of Truth

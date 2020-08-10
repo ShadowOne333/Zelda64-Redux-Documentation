@@ -1,0 +1,84 @@
+//------------------------------------------------------------------
+//	Master Quest in v1.0
+//------------------------------------------------------------------
+
+
+//------ Dungeon layouts
+
+CHECK "IMPORT DUNGEONS.TXT" AND "UNCENSORED MQ TEXTURES.TXT" FILES FOR IMPORTING THE DUNGEONS!!!
+
+
+//------ Main ZELDA Master Quest logo (with subtitle)
+
+For the custom title screen, we could reuse the code for the "title.bin" file that the Rando uses for their title screen, and instead make a new title.bin that has our custom "Master Quest" one.
+The new title.bin had to be made from scratch, based on the one from Rando, since Master Quest separates the subtitle on its own texture, apart from the main logo, and v1.0 doesn't have said extra space for it.
+
+Import the new "title.bin" file at 0x01795300 up to 0x017AE300 in a v1.0 ROM. Title should be 32bpp ABGR.
+
+
+//------ THE LEGEND OF & OCARINA OF TIME texts colours
+
+To change the title screen "THE LEGEND OF" and "OCARINA OF TIME" texts colours, we need to modify the actor ovl_En_Mag, located at 0x00E6C0D0 in v1.0, and 00E59B70 in Debug.
+The precise RGB values can be found at 0x0E6E266 in v1.0, and at 0x0E5B66A in Debug for "THE LEGEND OF" and "OCARINA OF TIME" texts:
+C8 C8 34 21 96 -> 64 96 34 21 FF
+
+And for the overlays, at 0xE6E2A6 in v1.0, and at 0xE5B68E in Debug
+64 64 35 8C 32 -> 08 5C 35 8C 98
+
+Info taken from:
+https://wiki.cloudmodding.com/oot/En_Mag
+
+
+//------ Copyright section
+
+Copy the "copyright.bin" file into offset into 0x17AE300 up to 0x17AEB00 for a v1.0 ROM. Debug ROM is at 0x1810000 (2002) and 0x1810A00 (2003).
+
+* copyright.bin - Contains a custom made "(C)1998,2003 Nintendo" text by ShadowOne333
+* copyright-2003.bin - Contains a custom made "(C)2003 Nintendo" text by GhostlyDark
+
+Choose whichever the user wants freely.
+
+
+//----- Change Title screen flames from Red to Debug's Green -----\\
+
+0xE6C4BC in v1.0 Decompressed:
+3C 01 42 C8 -> 3C 01 43 48
+44 81 30 00 
+E4 60 62 D4 -> E4 60 62 D8
+E4 60 62 D8 -> E4 60 62 DC
+E4 60 62 E0 -> E4 60 62 E4
+E4 64 62 DC -> E4 64 62 D4
+E4 66 62 E4 -> E4 66 62 E0
+
+0xE6C764 in v1.0 Decompressed:
+3C 01 42 C8 -> 3C 01 43 2A
+44 81 50 00 
+26 01 7F FF 
+24 0A 00 02
+E4 42 62 D4 -> E4 42 62 D8
+E4 42 62 D8 -> E4 42 62 DC
+E4 42 62 E0 -> E4 42 62 E4
+E4 48 62 DC -> E4 48 62 D4
+E4 4A 62 E4 -> E4 4A 62 E0
+
+0xE6C9F0 in v1.0 Decompressed (Fade-in code):
+3C 01 C0 78 -> 3C 01 BF B0
+C4 44 62 DC -> C4 44 62 D4
+44 81 80 00 
+C4 4A 62 E4 -> C4 4A 62 E0
+46 06 22 00 
+84 4E 62 CA 
+26 01 7F FF 
+46 10 54 80
+E4 48 62 DC -> E4 48 62 D4 (E6CA10)
+25 CF FF FF
+E4 52 62 E4 -> E4 52 62 E0
+
+0xE6CA48 in v1.0 Decompressed:
+3C 01 42 C8 -> 3C 01 43 48
+44 81 40 00 
+26 01 7F FF 
+E4 46 62 DC -> E4 46 62 D4
+E4 48 62 E4 -> E4 48 62 E0
+
+

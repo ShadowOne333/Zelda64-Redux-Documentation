@@ -1,0 +1,45 @@
+//------------------------------------------------------------------
+// Circus Leader's Mask -> Troupe Leader's Mask
+//------------------------------------------------------------------
+
+TEXT:
+
+Replace all instances of "Circus" to "Troupe" in the text, can be done with any Hex editor, as the text is barebones ASCII.
+For this specific implementation, all text has been made using Scroll of Majora, and fixed manually through Hex editing when necessary.
+
+In compressed ROM (offsets change for a decompressed ROM):
+0xA00EBD - A00EC2 (Circus -> Troupe)
+0xA3F7E0 - A3F7E5 (Circus -> Troupe)
+0xA483E6 - A483EB (Circus -> Troupe)
+0xA4C115 - A4C11A (Circus -> Troupe)
+0xA4D2F8 - A4D2FD (circus -> troupe) lowercase
+0xA4DED8 - A4DEDD (Circus -> Troupe)
+0xA4F7E7 - A4F7EC (Circus -> Troupe)
+
+
+GRAPHIC:
+
+Change the "Circus Leader's Mask" graphic texture to ShadowOne333's custom "Troupe Leader's Mask" texture.
+Decompress using the Yaz0 tools (Yaz0Split by Ozidual was used for this particular test), then search in ROM by Hex after compressing the .rarc file back:
+
+Circus Leader's Mask
+218 - 4D4F0 - 98CB94.rarc
+
+Compress back with Yaz0enc, then search in ROM.
+Format is:
+
+For sprites: 4bpp linear
+For textures: 32bpp ABGR (8888)
+Mode: 2-dimensional
+
+HOW TO IMPORT THE NEW GRAPHIC:
+In a clean MM Decompressed ROM, search for:
+59 61 7A 30 00 00 04 00 00 00 00 00 00 00 00 00 BB 00 00 00 30 11 11 11 D0 45 01 11 82 10 90 0B 40 1D 40 24 20 19 60 2E 11 40 25 F6
+
+Address in a decompressed v1.0 ROM:
+0xA2DDC4 - 0xA2E033
+
+That's the beginning of the Circus Leader's Mask text graphic, then replace the next 0x268 bytes with the entirety of the Hex data from the "Troupe Text (Comp).yaz0" file.
+
+
+NOTE: Gedecompressed can also work for this instance

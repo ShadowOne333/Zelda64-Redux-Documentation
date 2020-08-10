@@ -1,0 +1,97 @@
+//------------------------------------------------------------------
+//	Bean Seller and Deku Palace grottos
+//------------------------------------------------------------------
+
+The removed grottos from the Japanese version are divided into 3 different maps in the game, with a main Scene file.
+
+Name				Start		End		New
+Z2_DEKUCITY.zscene		2534000		2541220 ->	2541230
+Z2_DEKUCITY_room_00.zmap	2542000		2553A50
+Z2_DEKUCITY_room_01.zmap	2554000		2562950	->	25629B0
+Z2_DEKUCITY_room_02.zmap	2563000		25754F0 ->	25754B0
+
+
+These are the ones needed to modify the Deku Palace to restore the missing grottos, and also add the grottos back into the maps.
+For rooms 01 and 02, we need to modify the ending offset, as the ones that include the removed grottos are 10 bytes bigger and 10 bytes shorter than the original USA v1.0 maps, respectively.
+
+This can easily be done by modifying the DMA table located at 0x0001A500-0x00020700, searching for the starting or ending addresses.
+For example, to locate the DEKUCITY zscene offsets in the DMA Table, we do a search for the starting address 02 53 40 00.
+This gives a match at 0x1F680, followed by the ending address at 0x1F684. The same applies for the zmap files.
+
+
+To modify the DMA table entries properly:
+
+At 0x01F680 in an MM USA v1.0 Decompressed ROM:
+02 53 40 00 02 54 12 20 -> 02 53 40 00 02 54 12 30 (Scene)
+
+At 0x01F6A0 in an MM USA v1.0 Decompressed ROM:
+02 55 40 00 02 56 29 50 -> 02 55 40 00 02 56 29 B0 (Room 1)
+02 56 30 00 02 57 54 F0 -> 02 56 30 00 02 57 54 B0 (Room 2)
+
+
+To restore the grottos, we can basically pull the data straight from the Japanese ROM. The only needed change (besides the DMA table modifications) is to adjust the Scene table inside the .zscene file so the offsets of the new zmaps match with the v1.0 ROM offsets:
+
+
+
+* DEKUCITY.zscene (0x25A5000 - 0x25B2230 in Jap v1.0 Dec)
+For the actual zmap data, search for the following in the ROM:
+15 01 00 00 00 00 13 12 04 03 00 00 02 00 01 90
+0E 05 00 00 02 00 01 40 19 00 00 00 00 00 00 00
+
+Starts at 0x25A5000 in an MM J v1.0 ROM, and at 0x2534000 in an MM U v1.0 ROM.
+Replace 0xD230 bytes at starting point (0x02534000 up to 0x0254121F in a vanilla decompressed ROM) with the DekuScene.bin file.
+Once the .zscene data has been copied into the v1.0, we need to adjust the starting and ending offsets of the rooms for the v1.0 ROM, so at 0x2534190, paste the following:
+02 54 20 00 02 55 3A 50 02 55 40 00 02 56 29 B0 02 56 30 00 02 57 54 B0
+
+We are basically adjusting the offsets so the scene file now uses the offsets on the v1.0 ROM, instead of the offsets from the Japanese ROM.
+That should be it for the zscene file.
+
+
+* DEKUCITY_room_00.zmap (Taken from 0x25B3000 - 0x25C4A40 in Jap v1.0 Dec)
+For the actual zmap data, search for the following in the ROM:
+16 00 00 00 00 00 00 04 08 00 00 00 00 00 10 00
+12 00 00 00 00 00 00 00 10 00 00 00 FF FF 03 00
+0A 00 00 00 03 00 03 10 0B 11 00 00 03 00 00 40
+
+Replace 0x11A50 bytes (at 0x2542000 up to 0x2553A50 in a vanilla decompressed ROM) with the DekuRoom00.bin file.
+
+
+* DEKUCITY_room_01.zmap (Taken from 0x25C5000 - 0x25D39B0 in Jap v1.0 Dec)
+This needs to have its DMA table offsets to accommodate for the expanded data of the new (Japanese) zmap.
+To make the DMA change, search in the ROM for this:
+02 56 29 50 -> 02 56 29 B0
+
+(0x02361D70)
+For the actual zmap data, search for the following in the ROM:
+16 00 00 00 00 00 00 04 08 00 00 00 00 00 10 00
+12 00 00 00 00 00 00 00 10 00 00 00 FF FF 03 00
+0A 00 00 00 03 00 02 60 0B 11 00 00 03 00 00 40
+
+Replace 0xE9B0 bytes (at 0x02554000 up to 0x025629B0 in a vanilla decompressed ROM) with the DekuRoom01.bin file.
+
+
+* DEKUCITY_room_02.zmap (Taken from 0x025D4000 - 0x25E64B0 in Jap v1.0 Dec)
+This needs to have its DMA table offsets to accommodate for the reduced data of the new zmap.
+To make the DMA change, search in the ROM for this:
+02 57 54 F0 -> 02 57 54 B0
+
+For the actual zmap data, search for the following in the ROM:
+16 00 00 00 00 00 00 04 08 00 00 00 00 00 10 00
+12 00 00 00 00 00 00 00 10 00 00 00 FF FF 03 00
+0A 00 00 00 03 00 02 A0 0B 11 00 00 03 00 00 40
+
+Replace 0x124F0 bytes at (0x02563000 up to 0x025754E0 in a vanilla decompressed ROM) with the DekuRoom02.bin file.
+
+
+
+NOTE: Once the changes for this have been done, and the DMA table has been modified, we need to fix the checksum of the ROM manually.
+This tutorial helps with that:
+https://www.tapatalk.com/groups/zelda64/mm-moving-files-t850.html
+
+Basically, just using this tool:
+https://www.smwcentral.net/?p=section&a=details&id=8799
+With the command:
+rn64crc.exe -u (Decompressed Majora v1.0 ROM).z64
+Recalculates the checksum automatically
+
+

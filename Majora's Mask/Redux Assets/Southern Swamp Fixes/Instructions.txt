@@ -1,0 +1,77 @@
+//------------------------------------------------------------------
+//	Cleansed Southern Swamp Fixes (Z2_SICHITAI2.zscene)
+//------------------------------------------------------------------
+
+// Fix for a misplaced door after Woodfall has been cleared and you return to the Potion Shop. The door is slightly pushed forward compared to the door when Woodfall hasn't been cleared yet.
+// The fix has been taken from the very same data from the Poisoned Swamp map/data files, which have the correct door and spawn point positions.
+
+
+DMA Table changes:
+0x01EC20:
+01 F1 E0 00 01 F3 92 40 -> 01 F1 E0 00 01 F3 94 F0
+
+0x01EC40:
+01 F4 D0 00 01 F5 A0 A0 -> 01 F4 D0 00 01 F5 A1 C0
+
+
+//--- Z2_SICHITAI2.zscene
+
+The fixed positions for the door and the spawn point can be copy-pasted from the very same v1.0 USA ROM, from the Poisoned Swamp .zscene:
+
+* Southern Swamp (Poisoned) Scene file (Begins at 0x2825000):
+Spawn Point: 0x28250E0 (Poisoned Swamp) copied into 0x1F0D0E0 (Cleansed Swamp, 0F bytes)
+
+Door Position: 0x2825180 (Poisoned Swamp) copied into 0x1F0D180 (Cleansed Swamp, 0B bytes)
+
+
+//------------------------------------------------------------------
+//	Room/Map Fixes
+//------------------------------------------------------------------
+
+* Preparations:
+
+To start with the restoration for the water sounds for the two rooms with the Witch's Hut from the Southern Swamp Cleansed scene, we will be using the following website for reference:
+https://wiki.cloudmodding.com/mm/Scenes_and_Rooms#Header_Commands
+
+
+Specifically, the following header command:
+0x01 	Defines the actor list 	01xx0000 yyyyyyyy 	x is the number of actors
+y is the segment offset to that list. Follows the actors list format. 	rooms 	 ? 
+
+
+//--- Z2_SICHITAI2_room_00.zmap
+
+
+1) At 0x1F1E030, we have the 01XX0000 YYYYYYYY command, which for this room is [01 2A 00 00 03 00 00 68]. The $2A specifies the number of actors used in this room, we will add one actor taken from the Poisoned Swamp room, so we overwrite this value with $2B to account for the copied actor from the Poisoned Swamp data. Also, we need to change where the new actor table will begin from inside the .zmap file. Since we will be moving the actor table to 0x1F39240 (1B240 bytes), and the header command takes 0x1F1E000 as location $000000, we modify the data at 0x1F1E030 like this:
+[01 2B 00 00 03 01 B2 40]
+
+2) To avoiding touching anything else from the room file, we will move the entire actor table at the end of the room file, so select everything from 0x1F1E068 up to 0x1F1E308 (0x2A0 bytes), copy-paste it at address 0x1F39240. The room data should now end at 0x1F394E0
+
+3) To restore the waterfall actor sound from the Poisoned Swamp Witch'a Hut area into the Cleansed Swamp Witch's Hut data, we will also be using the actor data straight from the MM USA v1.0 ROM, from its direct equivalent file, the Poisoned Swamp room 0 data:
+
+At 0x2837360:
+00 F0 08 52 00 3B 07 40 00 07 00 7F 00 7F 00 82
+
+Copy those specific values at the end of where we copied the previous actor table at 0x1F394E0, so the new actor table should now end at 0x1F394F0.
+
+At the end, room_0 should go up from 0x01F1E000 up to 0x01F394F0
+
+
+
+//--- Z2_SICHITAI2_room_02.zmap
+
+1) At 0x1F1E030, we have the 01XX0000 YYYYYYYY command, which for this room is [01 11 00 00 03 00 00 68]. The $11 specifies the number of actors used in this room, we will add one actor taken from the Poisoned Swamp room, so we overwrite this value with $12 to account for the copied actor from the Poisoned Swamp data. Also, we need to change where the new actor table will begin from inside the .zmap file. Since we will be moving the actor table to 0x1F39240 (1B240 bytes), and the header command takes 0x1F4D000 as location $000000, we modify the data at 0x1F1E030 like this:
+[01 2B 00 00 03 01 B2 40]
+
+2) To avoiding touching anything else from the room file, we will move the entire actor table at the end of the room file, so copy everything from 0x1F4D068 up to 0x1F4D188 (0x110 bytes), copy-paste it at address 0x1F5A0A0. The room data should now end at 0x1F5A1A0.
+
+3) To restore the waterfall sounds from the Poisoned Swamp Witch'a Hut area into the Cleansed Swamp Witch's Hut data, we will also be using data straight from the MM USA v1.0 ROM, from its direct equivalent file, the Poisoned Swamp room 2 data:
+
+At 0x286A1B4:
+00 F0 11 15 00 00 FB 94 00 07 00 7F 00 7F 00 82
+
+Copy those specific values at the end of where we copied the previous actor table at 0x1F5A1A0, so the new actor table should now end at 0x1F5A1C0.
+
+At the end, room_2 should go up from 0x01F4D000 up to 0x01F5A1C0
+
+

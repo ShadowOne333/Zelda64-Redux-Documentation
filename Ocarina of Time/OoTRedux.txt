@@ -1,0 +1,202 @@
+///*************	OCARINA OF TIME REDUX	*************\\\
+
+
+//------------------------------------------------------------------
+//	Undo RNG-specific hacks for Redux
+//------------------------------------------------------------------
+
+//--- Undo Dampe Digging 1st Try hack:
+0xCC4024:
+00 00 00 00 -> 14 41 00 0A
+
+
+//--- Undo Easier Fishing hack:
+0xDBF428:
+0C 10 07 7D 3C 01 42 82 44 81 40 00 44 98 90 00 E6 52 01 -> C6 52 01 9C 3C 01 42 82 44 81 40 00 46 00 91 00 E6 44 01
+
+0xDBF484:
+00 00 00 00 -> E6 62 01 9C
+
+0xDBF4A8
+00 00 00 00 -> E6 48 01 9C
+
+//--- Restore Adult Fish size requirement
+0xDCBEA8:
+3C 01 42 48 -> 3C 01 42 70
+
+
+0xDCBF24:
+3C 01 42 48 -> 3C 01 42 70
+
+//--- Restore Child Fish size requirement
+0xDCBF30:
+3C 01 42 30 -> 3C 01 42 48
+
+0xDCBF9C:
+3C 01 42 30 -> 3C 01 42 48
+
+
+//---------------------------------------------------------------
+//	Gerudo Symbols from v1.2 (and subsequent releases)
+//---------------------------------------------------------------
+
+This section of the hack will basically port over all the textures from v1.2 or other releases (like GC or PAL) that removed the Crescent Moon symbol from all Gerudo imagery for a new symbol to avoid any religious controversy.
+
+Simply import all of the .bin files accordingly into the specified addresses.
+
+0x2464D88 - 0x2465588: 1.bin (Different for MQ!)*
+0x12985F0 - 0x12987F0: 2.bin
+0x21B8678 - 0x21B8878: 3.bin
+0x13B4000 - 0x13B5000: 4.bin
+0x07FD000 - 0x07FE000: 5.bin
+(#6: Grey Mirror shield seems to be done through code)
+0x28BBCD8 - 0x28BC0D8: 7.bin (Different for MQ!)*
+0x28CA728 - 0x28CAB28: 7.bin (Different for MQ!)*
+0x0F70350 - 0x0F70B50: 8.bin
+0x0F80CB0 - 0x0F814B0: 9.bin
+0x11FB000 - 0x11FC000: 10.bin
+0x2B03928 - 0x2B04128: 11.bin (Different for MQ!)*
+0x2B5CDA0 - 0x2B5D5A0: 12.bin (Different for MQ!)*
+0x2B9BDB8 - 0x2B9C5B8: 12.bin (Different for MQ!)*
+0x2BE7920 - 0x2BE8120: 12.bin (Different for MQ!)*
+0x0F7A8A0 - 0x0F7B0A0: 13.bin
+0x0F71350 - 0x0F71B50: 14.bin
+0x0F92280 - 0x0F92A80: 15.bin
+0x0F748A0 - 0x0F74CA0: 16.bin
+0x0E68CE8 - 0x0E69CE8: 17.bin
+0x0F70B50 - 0x0F71350: 18.bin
+0x1456388 - 0x1456B88: 19.bin
+0x1616000 - 0x1616400: 20.bin
+0x2F64E38 - 0x2F65E38: 21.bin (Spirit Temple Boss Room 1)
+0x2F73700 - 0x2F74700: 21.bin (Spirit Temple Boss Room 2)
+
+* Refer to "Uncensored MQ Textures.txt" inside the "Master Quest" folder for importing 1.bin, 7.bin, 11.bin and 12.bin specifically for applying these texture for importing into a Master Quest project.
+
+
+//---------------------------------------------------------------
+//	Remove File Select Item Icons
+//---------------------------------------------------------------
+
+At 0xBAF738 in a Decompressed Redux ROM, paste the following bytes:
+
+3C 19 80 10 33 0B 00 FF AC 4B 00 04 8D 42 02 C0 3C 0B 80 10 3C 01 F6 00 24 4C 00 08 AD 4C 02 C0 8F 39 E5 00 8D 6B E5 04 AC 40 00 04 27 2D FF FF 31 AE 03 FF 25 6C FF FF 31 99 03 FF 00 0E 7B 80 01 E1 C0 25 00 19 68 80 03 0D 70 25 AC 4E 00 00 8F BF 00 1C 8F B0 00 18 27 BD 00 88 03 E0 00 08 00 00 00 00
+
+
+
+
+# Old Method: Hide File Select Item Icons
+
+This code modifies all of the Item icons' position data.
+I couldn't hide the icon tiles, but I can at least move them to an not-seen position on-screen.
+
+0x348A1FC (6 bytes):
+9A B9 A5 B9 B2 B9 -> 9A FF A5 FF B2 FF
+
+
+0x3488EA4 - 0x3488F5B (B8 bytes):
+00 4E 91 00 66 91 00 8A 91 00 8A 9D 01 72 AD 00 7E AD 00 8A AD 00 00 00 00 00 42 85 00 01 4E 85 00 02 5A 85 00 03 66 85 00 04 72 85 00 05 7E 85 00 06 42 91 FF 07 4E 91 00 09 5A 91 FF 0A 66 91 00 0C 72 91 00 0D 7E 91 00 0E 42 9D 00 0F 4E 9D 00 10 5A 9D 00 11 66 9D 00 12 72 9D 00 13 7E 9D FF 00 FF FF FF 00 FF FF 00 3B 9A 85 00 3C A6 85 00 3D B2 85 FF 00 FF FF 00 3E 9A 91 00 3F A6 91 00 40 B2 91 FF 00 FF FF 00 41 9A 9D 00 42 A6 9D 00 43 B2 9D FF 00 FF FF 00 44 9A A9 00 45 A6 A9 00 46 B2 A9 FF 00 FF FF 00 14 8A 85 00 1B 72 B9 01 0A 7E B9 01 09 8A B9
+
+Change to:
+00 FF FF 00 FF FF 00 FF FF 00 FF FF 01 FF FF 00 FF FF 00 FF FF 00 00 00 00 00 FF FF 00 01 FF FF 00 02 FF FF 00 03 FF FF 00 04 FF FF 00 05 FF FF 00 06 FF FF FF 07 FF FF 00 09 FF FF FF 0A FF FF 00 0C F2 FF 00 0D FF FF 00 0E FF FF 00 0F FF FF 00 10 FF FF 00 11 FF FF 00 12 FF FF 00 13 FF FF FF 00 FF FF FF 00 FF FF 00 3B FF FF 00 3C FF FF 00 3D FF FF FF 00 FF FF 00 3E FF FF 00 3F FF FF 00 40 FF FF FF 00 FF FF 00 41 FF FF 00 42 FF FF 00 43 FF FF FF 00 FF FF 00 44 FF FF 00 45 FF FF 00 46 FF FF FF 00 FF FF 00 14 FF FF 00 1B FF FF 01 0A FF FF 01 09 FF FF
+
+
+0x34890B0 - 0x34890EB (3C bytes):
+97 FF 63 3E B9 FF 50 28 46 B9 63 97 FF 4E B9 FF 9F 00 56 B9 FF 63 FF 5E B9 FF F0 63 66 B9 FF FF FF 3E AD FF FF FF 46 AD FF FF FF 4E AD FF FF FF 56 AD FF FF FF 5E AD FF FF FF 66 AD 
+
+Change to:
+97 FF 63 FF FF FF 50 28 FF FF 63 97 FF FF FF FF 9F 00 FF FF FF 63 FF FF FF FF F0 63 FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF FF
+
+//---------------------------------------------------------------
+//	Restore Cow Nose Rings
+//---------------------------------------------------------------
+
+Thanks to Dybbles for the cheat code, which helped me find the ROM code to modify to reenable the cows' nose rings!!
+In cheat code format:
+
+Restore Nose Ring To All Cows by Dybbles (OoT v1.0)
+D11EABC8 ACC0
+811EABC8 0000
+D11E4FE8 ACC0
+811E4FE8 0000
+D11E33E8 ACC0
+811E33E8 0000
+D11E9F48 ACC0
+811E9F48 0000
+D11E6628 ACC0
+811E6628 0000
+D11E7DF8 ACC0
+811E7DF8 0000
+D11E3C48 ACC0
+811E3C48 0000
+
+
+I managed to find it's equivalent in the ROM, if anyone wants to include it in their hacks.
+The ROM change is quite small, because that code gets called each time, but at different locations in RAM whenever you enter a room that has a cow actor in it. That's why the cheat code is so big, and the ROM patch is just a couple bytes changed.
+
+OoT v1.0/Redux Decompressed:
+0xEF3E68
+AC C0 -> 00 00
+
+
+//------------------------------------------------------------------
+//	Fire Temple song from v1.2 (and other versions)
+//------------------------------------------------------------------
+
+DMA Table changes:
+
+At 0x7460 (DMA Table, Pointer to AudioBank):
+00 00 D3 90  00 02 9D E0  00 00 D3 90  00 00 00 00 
+change to:
+00 00 D3 90  00 03 91 30  00 00 D3 90  00 00 00 00
+
+At 0x7470 (DMA Table, Pointer to AudioSeq):
+00 02 9D E0  00 07 94 70  00 02 9D E0  00 00 00 00
+change to:
+00 03 91 30  00 08 8B B0  00 03 91 30  00 00 00 00
+
+At 0x7480 (DMA Table, Pointer to AudioTable):
+00 07 94 70  00 4D 9F 40  00 07 94 70  00 00 00 00
+change to:
+00 08 8B B0  00 4D 9F 40  00 08 8B B0  00 00 00 00
+
+
+Update the MIPS assembly that loads AudioSeq:
+
+At 0xB2E82C:
+3C 05 00 03 24 A5 9D E0 -> 3C 05 00 04 24 A5 91 30
+
+Update the MIPS assembly that loads AudioTable:
+At 0xB2E854:
+3C 05 00 08 24 A5 94 70 -> 3C 05 00 09 24 A5 8B B0
+
+
+Actual data:
+
+Copy the 12FireTemple.bin file at 0x0000D390. (Yes, it's 5MB in size)
+Make sure it ends at 0x004D9F50! 
+
+AudioBank pointer table - B896A0 (420 bytes)
+Copy 12AudioBankPointers.bin at 0xB896A0 up to 0xB89AC0
+
+AudioSeq pointer table - B89AD0 (6F0 bytes)
+Copy 12AudioSeqPointers.bin at 0xB89AD0 up to 0xB8A1C0
+
+AudioTable pointer table - B8A1C0 (80 bytes)
+Copy 12AudioSeqPointers.bin at 0xB8A1C0 up to 0xB8A240
+
+
+//---------------------------------------------------------------
+//	Fix Young Link eye textures (MM Model)
+//---------------------------------------------------------------
+
+At 0xFBE000 in a decompressed ROM (Palette at 0xFC3000 16bpp RGBA) import "YoungMMLinkEyeFix.bin"
+
+
+//---------------------------------------------------------------
+//	Subscreen Delay Fix
+//---------------------------------------------------------------
+
+Thanks to Dybbles for the cheat code that helps with this!
+
+0xB13C74 in a decompressed OoT v1.0 ROM:
+AC 86 00 04 -> AC 8A 00 04

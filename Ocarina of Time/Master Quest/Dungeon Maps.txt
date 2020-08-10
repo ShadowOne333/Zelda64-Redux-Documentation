@@ -1,0 +1,88 @@
+//---	ovl_map_mark_data (Minimap Chests.bin)
+
+Each minimap takes around 72 bytes in the "Minimap Chests.bin"
+With that said, each dungeon has a set amount of minimaps, and with that number, we determine how many bytes each dungeon takes from the file:
+
+---------------------------------
+
+Deku Tree (0x0000 - 0x05CB):
+13 minimaps (0D)
+0x5CA
+
+Dodongo (0x05CC - 0x0E43):
+19 minimaps (13)
+0x876
+
+Jabu (0x0E44 - 0x15D7):
+17 minimaps (11)
+0x792
+
+Forest (0x15D8 - 0x21DF):
+27 minimaps (1B)
+0xC06
+
+Fire (0x21E0 - 0x32CB):
+38 minimaps (26)
+0x10EC
+
+Water (0x32CC - 0x4663):
+44 minimaps (2C)
+0x1398
+
+Spirit (0x4664 - 0x5517):
+32 minimaps (20)
+0xE40
+
+Shadow (0x5518 - 0x611F):
+31 minimaps (1F)
+0xC08
+
+Well (0x6120 - 0x6593):
+6 minimaps (06)
+0x2AC
+
+Ice (0x6594 - 0x6AEC):
+12 minimaps (0C)
+0x558
+
+
+
+//---	ovl_kaleido_scope (Mainmap Chests.bin)
+
+Each Pause map takes around 0x1EC bytes per-floor in the "Mainmap Chests.bin". With that said, each dungeon has a set amount of maps based on how many floors said dungeon has, and with that number, we determine how many bytes each dungeon takes from the file:
+
+------------------------------------
+
+Deku Tree (0x0000 - 0x099B): 
+5 maps
+0x99C
+
+Dodongo (0x099C - 0x0D73): 
+2 maps
+
+Jabu Jabu (0x0D74 - 0x114B): 
+2 maps
+
+Forest (0x114C - 0x18FB):
+4 maps
+
+Fire (0x18FC - 0x2297):
+5 maps
+
+Water (0x2298 - 0x2A47):
+4 maps
+
+Spirit (0x2A48 - 0x31F7):
+4 maps
+
+Shadow (0x31F8 - 0x39A7):
+4 maps
+
+Well (0x39A8 - 0x3F6B):
+3 maps
+
+Ice (0x3F6C - 0x415F):
+1 map
+
+
+

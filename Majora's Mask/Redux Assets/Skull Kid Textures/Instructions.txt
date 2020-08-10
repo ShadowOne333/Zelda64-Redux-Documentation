@@ -1,0 +1,35 @@
+//------------------------------------------------------------------
+//	Skull Kid Texture replacement
+//------------------------------------------------------------------
+
+Convert texture in .png format to .tga via Linux terminal. 
+Then use an app called tga2rgba16.exe on the converted .tga to get the bytes used in the compression for the Majora's Mask ROM (The bytes need to be flipped/swapped).
+
+Then, search in the ROM with codec 16bpp ABGR as 2-dimensional mode.
+With the converted tga to RGBA16, we can open the .bin image in a Hex editor, and look for a single row of the file in the Decompressed ROM, that should give us the offset where to look at in the ROM.
+
+
+Addresses in Decompressed v1.0 ROM:
+
+BEAK:
+Import "Beak.bin" at 0x181C620 and up to 0x181C820 in a Decomprssed MM USA v1.0 ROM
+(Taken from 0x1843520 - 0x1843720 in Japanese v1.0 Decompressed ROM)
+
+FACE:
+Import "Face.bin" at 0x181C820 and up to 0x181CA20 in a Decomprssed MM USA v1.0 ROM
+(Taken from 0x22402F0 - 0x22404F0 in Japanese v1.0 Decompressed ROM)
+
+
+
+
+//--- ADDITIONAL INFO FOR OTHER ROMS.
+
+For searching the texture in any ROM, do an Hex search for the original censored face texture:
+00 01 00 01 00 01 00 01 00 01 00 01 00 01 00 01
+00 01 00 01 00 01 00 01 00 01 00 01 00 01 00 01
+18 01 00 01 10 01 08 01 08 01 00 01 20 01 10 01
+18 01 18 01 00 01 00 01 00 01 18 01 00 01 00 01
+
+The texture is 200 bytes (0x200 or 1FF), simply fill up the entire 200 bytes with these values repeating to restore the original Japanese Skull Kid face:
+00 01 00 01 00 01 00 01 00 01 00 01 00 01 00 01
+00 01 00 01 00 01 00 01 00 01 00 01 00 01 00 01

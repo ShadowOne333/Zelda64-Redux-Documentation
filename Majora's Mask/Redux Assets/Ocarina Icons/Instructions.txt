@@ -1,0 +1,82 @@
+//---	INSTRUMENT ICONS ON SUBSCREEN	---\\
+
+Addresses in RAM which determine what item icon/item name to load.
+8021264C
+8023295C
+
+Address that shows what item is where on the subscreen
+801EF6D0
+
+
+-------------------------------------------------------------------
+
+1) You can check the text for the new instruments by changing the following:
+At 0xC5D220 you will see the text ID entries pointers for each instrument:
+Deku Pipes:	00 2B 50 00 08 00 11 74
+Goron Drums:	00 2C 50 00 08 00 12 1C
+Zora Guitar:	00 2D 50 00 08 00 12 AC
+
+And for the ocarina, it's at 0xC625C8:
+17 00 00 00 08 04 0A D8
+
+You can easily test them in game by changing the first two bytes of the ocarina text pointer with the ones for the items.
+
+For example, to test the Deku Pipes in-game:
+At 0xC5D220 (Deku Pipes):
+[b]00 2B[/b] 50 00 08 00 11 74 -> [b]17 00[/b] 50 00 08 00 11 74
+At 0xC625C8 (Ocarina of Time):
+[b]17 00[/b] 00 00 08 04 0A D8 -> [b]00 2B[/b] 00 00 08 04 0A D8
+
+The same can be done for the other instruments' text.
+
+If you do that, when you boot-up the game, go to the Ocarina of Time item in the Subscreen (Pause) and press A, you will get the new text with a dummy icon. Only the Deku Pipes have a dummy icon, the other two instruments have the proper icon showing up. This is explained in the next point.
+
+-------------------------------------------------------------------
+
+2) The text entry for each instrument begins with a control code for showing up an icon, [06 01 XX], where XX is a value that changes which icon shows up. Here's a list of the icons that can appear with said Hex value ("Msg." column  is the Hex value to account for):
+https://wiki.cloudmodding.com/mm/Text_Format#Icon_Values
+
+The exact address where each instrument text begins:
+Deku Pipes: 0xAD2174
+Goron Drums: 0xAD221C
+Zora Guitar: 0xAD22AC
+
+Icon IDs $64 and $70 correspond to the Drums and the Guitar, respectively.
+
+Currently no change is needed for the Drums nor the Guitar, only for the Pipes, as neither the Slingshot nor the Granny's Drink show up with any of the text formatting icon IDs.
+
+-------------------------------------------------------------------
+
+3) The icon ID values used in the text formatting are entirely different from the actual item icon IDs, which are listed here (under the "International releases" table), as this are the ones that are needed :
+https://wiki.cloudmodding.com/mm/Item_List#Data
+
+Icons that I've replaced for the new instruments:
+Slingshot (Icon ID $0B) -> Deku Pipes
+Bottled Blue Fire (Icon ID $1C) -> Goron Drums
+Bottled Granny's Drink (Icon ID $26) -> Zora Guitar
+
+I currently have no idea how the game deals with icon ID loading for the subscreen, but this should be a matter of hijacking the original Ocarina of Time icon routine for the Subscreen, and make it load a different ID based on the form loaded.
+
+IMPORTANT:
+The item ID should still be 00 to avoid problems with hard coded checks for the Ocarina!
+
+-------------------------------------------------------------------
+
+4) The Subscreen item names are also handled as graphics.
+Text Name Entry 00 (Hex) is "Ocarina of Time" (for reference), located at 0xA27844 - AxA27A03.
+
+To test the item names in-game, you can copy-paste/replace the data range for the Ocarina of Time item name with any of the following item names:
+
+
+"Pipes Text (Comp).yaz0" at 0xA28204 - 0xA28473 (Padded out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
+Text Name Entry: 05 (Hex, unknown how the game calls for these textures)
+
+"Drums Text (Comp).yaz0" at 0xA28AF4 - 0xA28CA3 (Padded out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
+Text Name Entry: 0B (Hex, unknown how the game calls for these textures)
+
+"Guitar Text (Comp).yaz0" at 0xA29554 - 0xA297A3 (Padded out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
+Text Name Entry: 11 (Hex, unknown how the game calls for these textures)
+
+-------------------------------------------------------------------
+
+I know this was quite a mouthful, but I wanted to be able to give the best possible explanation, data and resources possible to make this as easier for you as possible, so you don't have to actually redo everything I've already done for you to even start with the code.

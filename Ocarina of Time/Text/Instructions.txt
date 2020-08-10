@@ -1,0 +1,17 @@
+//------------------------------------------------------------------
+// Text bug and typo fixes
+//------------------------------------------------------------------
+
+Note: All of the text for OoT has been implemented or fixed according to subsequent release of Ocarina of Time, be it v1.1, v1.2, GC or other region ROMs. Scroll of Time was used for this implementation.
+
+
+DMA Table (0x007590) to allow for more text space:
+00 92 D0 00 00 96 51 30 -> 00 92 D0 00 00 96 52 40
+
+Import "nes_message_data_static" at address 0x92D000
+Should be 0x038240 bytes in length, ending at 0x965240
+
+Import the "table" file at 0xB849EC.
+Should be 0x43A8 bytes in length, ending at 0xB88D94
+
+The "mq_message_data_static" file is used for the specific Master Quest in v1.0 hack.

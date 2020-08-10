@@ -1,0 +1,675 @@
+///*************	REDUX TEXT CHANGES	*************\\\
+
+
+FOR IMPORTING ALL THE TEXT TYPO, BUGS, AND SOUND FX FIXES, PLEASE REFER TO THE "AREA TITLES SECTION.TXT"!!!
+
+"Scroll of Majora" was used to create all the new text and other text fixes from subsequent releases of MM into USA v1.0 (based on TCRF page).
+For control codes and other specific fixes, they were all done manually through Hex editing.
+
+Both non-txt files located inside this folder are necessary to get the new Area Titles working properly. Refer to the "Area Titles.txt" file for the needed changes and instructions.
+
+
+//------------------------------------------------------------------
+//	RETRANSLATIONS
+//------------------------------------------------------------------
+
+NOTE: All of the following text has been taken from the original Japanese release of Majora's Mask, and rearranged as seen fit.
+
+Japanese text taken from:
+http://www.zeldalegends.net/files/emulation/dumps/zelda6/japan/z6dump(jp).html
+
+English text taken directly from the v1.0 ROM
+
+
+//----- Turtle text retranslation
+
+JAPANESE ROM:
+
+よくやった よ
+コレで ゾーラの戦士の魂も
+安心して 眠りにつけるじゃろ・・
+ワシも古（いにしえ）のおきてに
+したがい ふたたび
+長い眠りに つかねばならん
+じゃが、このあたりに ただよう
+邪気は 完全には
+消えたわけではなさそうじゃ
+
+
+LITERAL TRANSLATION:
+
+Well done
+With this, the soul of Zola's warrior 
+can sleep with peace of mind...
+
+According to the old commandments, 
+I have to go to sleep again 
+for a long time, 
+(but the wickedness around here 
+seems not to have completely disappeared.)
+
+
+ORIGINAL (0xA2A5B3):
+
+Now I can continue resting in
+peace. I too must abide the laws
+of ancient times and again merely
+watch from my deep slumber...
+
+
+POSSIBLE RETRANSLATION:
+
+Now the Zora Warrior's soul
+can rest in peace...
+
+I, too, must abide the laws
+of ancient times, and have to
+return again to my deep slumber...
+
+
+//-----	Lulu's Diary text retranslation
+
+JAPANESE ROM:
+
+今日、１番 知られたくない
+ミカウに 全てを 知られて
+しまいました
+最初は はずかしくて 悲しくて
+どうしようもなかったけど
+その時 ミカウが いった言葉に
+私の心は 救われた
+思いがしました
+だけど、ミカウ お願いだから
+ムチャなことはしないで 
+
+
+LITERAL TRANSLATION:
+
+Today, Mikau, who I don't want 
+to know, has known everything.
+
+At first it was embarrassing and sad 
+and I couldn't help it.
+
+At that time, I thought that 
+the words Mikau said saved my heart.
+
+But Mikau, please don't do too much.
+
+
+ORIGINAL (0xA29F0F):
+
+Today, I told everything to Mikau,
+the one person whom I didn't
+want to know about it.
+
+At first, I was too embarrassed
+and too sad to do anything.
+
+And with the words that Mikau
+said at that moment, I felt that
+all hope had been lost.
+
+But please, Mikau, I'm begging you,
+don't do anything rash.
+
+
+POSSIBLE RETRANSLATION:
+
+Today, Mikau, the one person 
+whom I didn't want to know,
+about it, found out everything.
+
+At first, I was ashamed and 
+too sad, I couldn't help it.
+
+At that time, I thought the
+words Mikau said eased my heart.
+
+But please, Mikau, I'm begging you,
+don't do anything rash.
+
+
+//-----	Deku Butler text retranslation
+
+JAPANESE TEXT:
+
+実は あなた様を見ていると 
+昔 家を飛び出した 息子を
+思い出しまして・・・・
+なにやら息子と競争しているような
+そんな 気持ちになり
+年がいもなく 力を入れて
+しまいました・・・
+失礼を お許し ください
+お帰りは そちらの光の中からで
+ございます
+様
+また お会いできる日を 楽しみに
+しております・・・お気をつけて 
+
+
+LITERAL TRANSLATION:
+
+Actually, when I was looking at you, 
+I remember my son who left 
+the house a long time ago...
+
+It made me feel like I was
+competing with my son, 
+so I put all my effort into it...
+
+Please excuse my rudeness.
+
+I look forward to seeing you again...
+Please be careful.
+
+
+ORIGINAL (0xA17AD2):
+
+Actually, when I see
+you, I am reminded of
+my son who left home
+long ago...
+
+Somehow, I feel as if I am once
+again racing with my son...
+
+I am afraid I may have tried too
+hard to outrun you. As old as I
+am, I am still a fast competitor.
+Just like when I raced my son...
+
+Please forgive my rudeness.
+
+
+POSSIBLE RETRANSLATION:
+
+Actually, when I look at you,
+it reminds me of my son who
+left the house a long time ago...
+
+Somehow, it felt as if I was
+competing with my son once more,
+so I put all my effort into it...
+
+Please excuse my rudeness.
+
+I look forward to seeing you again...
+Be careful.
+
+
+//------------------------------------------------------------------
+// Text bug and typo fixes
+//------------------------------------------------------------------
+
+Most of the text typo or script changes listed here are not the final texts. "Scroll of Majora" made it possible to repoint the text without the hassle of doing it manually, so this allowed for much richer text to be introduced from subsequent releases and even Majora's Mask 3D.
+
+//----------------------------------------------------------------
+
+0xA06D34 - A06D76 (Changed "deep-sea" wrong description for Leevers to a proper, more suitable "fossorial", which means underground dweller or digging animal)
+Great Bay Coast 
+Beware of Leevers, dangerous
+fossorial life-forms!
+
+
+0xA1193E - A1195A (Text change to be closer to proper translation)
+Tsk! Gon'be an all-nighter...
+1E 69 6A
+
+
+0xA11A3A - A11A4A (Text change to be closer to proper translation)
+Again all night! 
+1E 69 6A
+
+
+0xA18E58 - A18E8F (Fixed wrong translation from medicinal herbs to mushrooms)
+She hasn't come back from
+picking mushrooms...
+
+
+0xA626CF - A62718 (Removed "so you all you" typo)
+You're our bodyguard, Grasshopper,
+so all you have to do is
+practice hard!
+
+
+0xA643BA - A643D5 (Removed extra exclamation mark after "fuzzy")
+You feel all warm and fuzzy 
+
+
+0xA1EA0B - A1EA31 (Fixed "them" to "it")
+Red Potion: 50 Rupees
+I'll buy it
+
+
+0xA5EEDC - A5EF2F (Break text box after "boulder" [10] and linebreak after "milk in from the" [11])
+You see, the road is blocked by a
+huge boulder.
+
+I can't get any milk in from the
+
+
+0xA674C0 - A674F5 (Break text box after "play..." [10] and linebreak after "I don't" [11])
+can let you play...
+
+If the doggies smell you, I don't
+
+
+0xA01DBC - A01E14 (Break text box after "Kafei!" [10] and linebreak after "Delive it for her!" [11])
+You were given a letter to Kafei!
+
+Quick! Deliver it for her! 
+Take it to a mailbox.
+
+
+0xA011ED - A01271 (Break text box after "Kamaro's Mask!" [10] and linebreak after "hoped they" [11])
+You got Kamaro's Mask!
+
+Use it to teach his dance to the
+world, so his moves can become
+as popular as he had hoped they
+would be.
+
+
+0xA19D83 - A19DED (Break text box after "hits." [10] and linebreak after "you'll" [11])
+Your last record was (##) hits.
+
+If you get more than that, you'll
+win a prize. 
+Now, then. Here we go!
+
+
+0xA5AEE3 - A5AF5E (Break text box after "go out yet." [10] and linebreak after "promise to her that" [11])
+I know Anju is worried...but I can't 
+go out yet. 
+
+I made a promise to her that
+I would bring the wedding mask
+and greet her.
+
+
+0xA3DC13 - A3DC71 (Break line after "played" [11] and space before "for me" [20])
+How's that? Pretty interesting,
+isn't it?
+But I like the song you played
+for me better, baby!
+
+
+0xA3E11F - A3E184 (Break text box after "isn't it?" [10] and linebreak after "any song" [11])
+How's that? Pretty interesting,
+isn't it?
+
+But I'm sure I'd like any song
+written by you better, baby!
+
+
+0xA592E7 - A5936B (Break text box after "for some reason." [10] and linebreak after "haven't even seen the" [11])
+We're pretty prepared, but our
+troupe leader seems to be acting
+strange for some reason.
+
+Well, we haven't even seen the
+
+
+0xA3960F - A39641 (Break text box after "outside of Ikana..." [10] and linebreak after "still swarms of" [11])
+But outside of Ikana...
+
+There are still swarms of
+wandering spirits with lingering
+regrets...
+
+
+0xA0CA8B - A0CB69 (Break text box after "people lingering" [10] and linebreak after "evacuation notice had" [11])
+Well, whatever you do, you had
+better get as far away from here
+as you can.
+
+And there are still people lingering
+in the stores...
+
+If only an evacuation notice had
+been posted, I would be able to
+force them all to leave...
+
+
+0xA285F1 - A286A1 (Break text box after "temperature." [10] and linebreak after "eggs can hatch" [11])
+Zora eggs are very sensitive to
+changes in the temperature.
+
+The only way the eggs can hatch
+is if they're placed in this
+aquarium water, which I set aside
+for them long ago.
+
+
+0xA13ED6 - A13F1A (Break text box after "Welcome." [10] and linebreak after "I'll bet you" [11])
+Welcome.
+
+Hey, you're pretty fit. I'll bet you
+do a lot of training!
+
+
+0xA4174D - A41754 (Change "Dinofols" to "Dinolfos" typo)
+Dinolfos
+
+0xA42D10 - A42D20 (Change "Wizrobe" to "Wizzrobe" typo)
+It's a Wizzrobe.
+You'll get your chance right when
+it starts to attack. Be on the
+lookout for it!
+
+
+(Change "Land Title Deed" to "Town Title Deed")
+You traded the Moon's Tear for a
+Land Title Deed!
+
+You traded the Moon's Tear for a
+Town Title Deed!
+
+
+You traded your Land Title Deed
+for a Swamp Title Deed!
+
+You traded your Town Title Deed
+for a Swamp Title Deed!
+
+
+Land Title Deed
+The title deed to the Deku Flower
+in Clock Town.
+
+Town Title Deed
+The title deed to the Deku Flower
+in Clock Town.
+
+
+You traded the Land Title Deed
+for this.
+
+You traded the Town Title Deed
+for this.
+
+
+//------------------------------------------------------------------
+//	Sound FX bugfixes / Missing SFX
+//------------------------------------------------------------------
+
+//-----	BEFORE BEGINNING -----\\
+
+https://www.romhacking.net/forum/index.php?topic=24340.msg338115#msg338115
+
+https://zelda64rus.ucoz.ru/forum/32-677-2#24369
+
+There are certain texts that begin with a sound effect format code [1E XX XX]. These ones seem to have a bug in v1.0 where, if the starting words had a sound effect format code before the first word, the sound won't play. This is caused due to the 2x text speed implemented in MM, so some format codes for sounds don't play because of that 2x text speed of Majora's Mask. 
+
+The culprit of the issue seems to be that, during the transition from Japanese to English, the [1F XX XX] control code (which handles delays before resuming text) broke compatibility with the [1E 00 00] control code.
+
+
+WORKAROUND FIX FOR THIS ISSUE:
+To fix the issue of the sounds not playing, we can do a workaround with the control codes.
+
+For this, we will make use of the [0A] control code JUST before the sound control code is played (1E XX XX).
+Let's take the "Ka-ching!" text as an example:
+
+* Original
+"Deposit mail here.[11][1F 00 0A]
+[1E 28 4C][17]Ka-ching![18][19]"
+
+* Workaround for it:
+"Deposit mail here.[20 20][0A][11]
+[1E 28 4C][17]Ka-ching![18][19]"
+
+
+To explain it, I simply padded out the text row before it with a couple of spaces (20 in Hex), and then added the [0A] control code, which makes slows down the text afterwards. 0A acts as a null character.
+
+It is recommended to use the [0A] at the end of the row before the text, as using it before the text itself will add a null character to the line.
+
+
+//------------------------------------------------------------------
+
+0xA1B83B - A1B83D (Fix the wrong sound FX for the Monkey burning by changing control code [1E 26 93] to [1E 29 63])
+"[sound 2693]Ooh! Hot! Hot!
+St-stop it! Please!!!"
+
+"[sound 2963]あちっ あちち
+や、やめてくれよ〜！！" 
+
+
+
+0xA1C5E9 - A1C5EB (Fix the wrong sound FX for the Deky Princess by changing control code [1E 63 94] to [1E 69 34]
+"I was worried that my father
+would even go so far as to punish
+the poor monkey!
+
+[sound 6394]Hoo-hoo-hoo."
+
+
+"まさか、おしおき でもしてるん
+じゃないかと心配してたのですよ
+[sound 6934]フフフ" 
+
+
+
+// ---(Not implemented yet)	- Happy Salesman Text (when shown Garo's mask)
+ That's the Garo's Mask, isn't it?
+
+[sound 6983]ガロのお面ですね 
+
+
+
+// ---(Not implemented yet)	- Darmani's text
+...[sound 3AE8]How infuriating!
+
+・・・・[sound 3AD0]くやしいゴロ！
+
+
+"[sound 3AE8]What a soothing melody...
+My sorrows are melting away into
+the song." 
+
+"[sound 3AD0]・・・イイ曲だゴロ
+オラのキモチが 曲の中に
+とけていくゴロ〜"
+
+
+
+// ---(Not implemented yet)	- Ikana Stalfos (King's Chamber) text
+[sound 3A39]The reason he beat us is because
+you were so feeble! Don't blame
+this on me!"
+
+[sound 3A89]やられたのは お前がヘボだからだ
+オレのせいに するな！！"
+
+
+"[sound 3A35]What?!
+[sound 3A88]Just try saying that again to
+my bony face!"
+
+"[sound 3A36]なにっ！
+[sound 3A88]もういっぺん 言ってみろ！"
+
+
+"[sound 3A39]Feeble!
+[sound 3A39]Feeble! Feeble! Feeble! Feeble!
+[sound 3A39]Feeble! Feeble! Feeble! Feeble!
+[sound 3A39]Feeble! Feeble! Feeble! Feeble!"
+
+"[sound 3A39]ヘボ
+[sound 3A89]ヘボ ヘボ ヘボ ヘボ ヘボ
+[sound 3A89]ヘボ ヘボ ヘボ ヘボ ヘボ"
+
+
+
+// ---(Not implemented yet)	- Astronomer's text (as Deku Link)
+"[sound 6949]Well, well...A strange-looking child
+has joined me today...
+
+"[sound 6946]おや、おや 今日は変わった子供の
+おでましじゃな・・・
+ボンバーズの新しい仲間かの？
+
+
+
+// ---(Not implemented yet)	- Gorman brothers' text
+"[sound 6925]Oh, too bad. And I was really
+gonna give you some milk if you
+had an empty bottle to put it in...
+It's true! Tooooo bad!"
+
+"[sound 6952]ザンネンだな〜
+あきビン持ってたら あげたのに
+いや〜 ザンネン ザンネン" 
+
+
+
+// ---(Not implemented yet)	- Giant's text
+"""Forgive your friend.""
+
+Forgive our friend?
+
+What do you mean by forgive?
+Huh? What friend?"
+
+"と・も・を・ゆ・る・せ
+友を ゆるせ？
+
+[sound 6845]ゆるせって・・何を？
+えっ、友・・・" 
+
+
+
+// ---(Not implemented yet)	- NPC talked with Kafei's mask
+"Kafei?
+
+I can recall when he was in the
+Bombers.
+
+Don't see his face much anymore,
+though...Well, what could he be
+doing?
+
+Try asking the children. The
+Bombers know all about what goes
+on in town."
+
+"[sound 6946]おお、その青毛 その髪形
+カーフェイじゃな？
+
+あの子が ボンバーズにいた頃を
+思い出すのう
+
+あまり顔を出さなくなったが・・・
+はて どうしておるのか
+
+子供たちに 聞いてみるといい
+ボンバーズは
+町の事情通じゃからな" 
+
+
+
+// ---(Not implemented yet)	- Dancers' minigame (Happens twice)
+"[sound 392A]Today is Basket Bomb day, isn't it
+Darling?"
+
+"[sound 692A]今日は バクダン・バスケット
+の日なのよ
+ねっ、ダ〜リン"
+
+
+
+// ---(Not implemented yet)	- NPC in Milk Bar who gives Leader's Mask
+"Why was the...? Why was the...?
+Why was the dog the leader?!?
+Was it 'cause something was
+wrong with me, sir???"
+
+"[sound 6980]なんで、イヌが リーダーなのさ〜
+なんで、イヌが リーダーなのさ〜
+それは、ボクが 悪いのか〜" 
+
+
+
+// ---(Not implemented yet)	- Mikau's story
+"But that girl, our vocalist...
+She laid some strange eggs.
+And she's lost her voice,
+You can't hear what she says."
+
+"[sound 6975]だけど、ボーカルのあの娘（こ）は
+ヘンなタマゴを産んで
+声をなくしちまったのさ〜"
+
+"Whoa-oh! In Great Bay now
+somethin' is a-happenin'.
+Is it now?"
+
+"[sound 6974]ｏｈ ｏｈ 近ごろグレートベイで
+何かが 何かが 起きている〜
+（そうなの？）" 
+
+
+
+// ---(Not implemented yet)	- Snowhead Business Scrub
+"But I can't open a business back
+home without following the proper
+procedures...
+Do you know what I mean?"
+
+"[sound 3AD2]でも、地元で商売するには
+それなりの スジを通さないと
+店が持てないッピ
+
+わかるかい？" 
+
+
+
+// ---(Not implemented yet)	- Koume (Swamp Cruiser attendant)
+"[sound 3901]Oh! Thanks for what you did back
+there!
+
+As a special just for you, I'll let
+you take this cruise for free."
+
+"[sound 3AC7]おお、さっきはありがとよ！
+
+あんたなら 今回 特別に
+ボートクルーズに
+タダで乗せてあげるよ" 
+
+
+
+// ---(Not implemented yet)	- Old Goron defrosted
+"No matter how long you follow me,
+it's not going to do you any good."
+
+"[sound 3ABB]いつまでも つきまとうなゴロ
+ムダなことゴロ"
+
+
+
+// ---(Not implemented yet)	- Goron at the shrine entrance
+[sound 3AFD]But I guess this is what's meant
+by the Goron saying, ""There's no
+use in crying over split rocks.""
+...Brrrrrr." 
+
+[sound 38FD]「こうかい先にたたず」とは
+このことだゴロ・・・・は〜" 
+
+
+
+// ---(Not implemented yet)	- Goron baby
+"Waaa...Hunh, ugh...u-waahhh!
+Da-daaaddy, daaaddy! Hunh...
+I'm cooooold...Daaaddy!"
+
+"[sound 38E9]ウエッ・・・ヒク、グエッ・・
+と、とうちゃ〜ん とうちゃ〜ん
+ヒク・・さむいよ とうちゃ〜ん" 
+
+
+
+// ---(Not implemented yet)	- Guards after sword has been stolen
+0xA02B3E
