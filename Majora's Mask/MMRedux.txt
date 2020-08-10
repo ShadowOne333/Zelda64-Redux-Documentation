@@ -1,204 +1,5 @@
 ///*************	MAJORA'S MASK REDUX	*************\\\
 
-//------------------------------------------------------------------
-//	Ocarina custom icons after transformations
-//------------------------------------------------------------------
-
-!!!	PENDING	/ SUBJECT TO CHANGE	!!!
-
-C625C8 - Ocarina text ID
-C5D220 - Instrument texts IDs
-
-Unused icons address (Yaz0):
-Ocarina -> A36F0C
-Fairy Ocarina -> A3936C
-Slingshot -> A3B9BC !!!
-Hookshot-> A3EDFC
-Granny's Drink -> A4B49C !!!
-Map (JP) -> A5095C (X)
-Deity Sword -> A6192C
-Unused Magic -> A655FC
-Fishing Rod -> A66AEC
-
-
-//----- Instrument Icons
-
-Replace Slingshot unused icon with the new Deku Pipes icon:
-Import "Pipes Icon (Comp).yaz0" at
-0xA3B9BC-0xA3C20C (Slingshot) OR 0xA4B49C-0xA4BC5C (Granny's Drink)
-(Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Icon ID: 0B (For text formatting [XX])
-NOTE: The text formatting control code [06 01 XX] doesn't have any entry that uses the Slingshot nor the Granny's Drink. Some custom assembly code for this might be needed to make any of the two appear in the text box
-
-Replace Blue Fire unused icon with the new Goron Drums icon:
-Import "Drums Icon (Comp).yaz0" at
-0xA44BFC - 0xA45665 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Icon ID: 1C (For text formatting [64])
-
-Replace Hylian Loach unused icon with the new Zora Guitar icon:
-Import "Guitar Icon Icon (Comp).yaz0" at
-0xA4AAFC - 0xA4B495 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Icon ID: 26 (For text formatting [70])
-
-
-//----- Instrument text graphics for Subscreen
-// Text Name Entry 00 (Hex) is "Ocarina of Time" (for reference)
-
-Replace 1st Unused Japanese text (after Light Arrows text) with the new Deku Pipes text:
-Import "Pipes Text (Comp).yaz0" at
-0xA28204 - 0xA28473 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Text Name Entry: 05 (Hex, unknown how the game calls for these textures)
-
-Replace 2nd Unused Japanese text (after Magic Beans text) with the new Goron Drums text:
-Import "Drums Text (Comp).yaz0" at
-0xA28AF4 - 0xA28CA3 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Text Name Entry: 0B (Hex, unknown how the game calls for these textures)
-
-Replace 3rd Unused Japanese text (after Great Fairy's Sword text) with the new Zora Guitar text:
-Import "Guitar Text (Comp).yaz0" at
-0xA29554 - 0xA297A3 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Text Name Entry: 11 (Hex, unknown how the game calls for these textures)
-
-
-
-
-// ---- EXTRA DOCUMENTATION! THE FOLLOWING IS NOT REQUIRED FOR IMPLEMENTATION
-
-The original Japanese ROM game has some unused icons that were supposed to replace the Ocarina item icon depending on what form Link is in. Once Link transforms, the Ocarina should change to either Guitar of Waves, Goron Drums or Deku Pipes.
-The Goron Drums and Zora Guitar icons were dumped directly from a Japanese v1.0 Majora's Mask ROM.
-
-SUBSCREEN TEXT GFX:
-
-For the Subscreen text graphics, there's unused Japanese text graphics that can be replaced. For this specific hack, we can use the very first 3 unused Yaz0 graphics: #162, #168 and #174.
-
-(For reference: 
-#157 -> Ocarina of Time -> Dec: 0x985B4C-0x985BC3)
-
-#162:
-Dec: 0x986FD4-0x98723E (AFTER LIGHT ARROWS)
-
-#168:
-Dec: 0x9878C4-0x987A69 (AFTER MAGIC BEANS)
-
-#172:
-Dec: 0x988324-0x988570 (AFTER LENS OF TRUTH->HOOKTSHOT->GREAT FAIRY SWORD)
-
-
-SUBSCREEN ICON GRAPHICS:
-
-For the icons, in the Japanese ROM using Gameshark to get the icons brings up a blank text box (NOTE: These icons are not in the US release! They need to be ported over, they could possibly replace icons 4A, 4B, 4C, which are listed as medallions)
-
-(For reference: 
-#293 -> Ocarina of Time (Icon 00) -> Dec: 0xA36F0C
-The rest of the icons are separated by "Yaz0" words in the ROM
-Follow item list from: https://wiki.cloudmodding.com/mm/Item_List)
-
-#367 (Icon 4A):
-Dec: 0x9BDCAC-0x9BE514 (2153 bytes)
-
-#368 (Icon 4B):
-Dec: 0x9BE51C-0x9BED83 (2152 bytes)
-
-#369 (Icon 4C):
-Dec: 0x9BED8C-0x9BF5F5 (2154 bytes)
-
-(NOTE: Only the guitar is below 2kB, so maybe another icon might be required to make it fit within the original space, or maybe repoint them? Drums icon is 2160 bytes, Guitar icon is 1840 bytes, Pipes icon is 2224 bytes. Possible options for the remaining ones:
-
-After Great Fairy Sword !
-After BUG! (Blue Fire bottle)
-After Chateau Romani! (Hylian Loach bottle)
-
-
-Bottled Blue Fire Icon 1C [321] - 2650 bytes
-Bottled Hylian Loach Icon 26 [331] - 2442 bytes)
-
-
-
-This hack *should* also repoint the text from the original Ocarina text to the new ones taken directly from Majora's Mask 3D, based on what transformation Link is currently in (Probably with some code reading the RAM address that's used for the Link transformations?)
-
-Link forms in RAM:
-0x801EF690, 0x803FFEFB
-	00 = Fierce Deity Link
-	01 = Goron Link
-	02 = Zora Link
-	03 = Deku Link
-	04 = Link
-
-Items 05, 0B, and 11 are fully functional internally, but the item id should still be 00 to avoid problems with hard coded checks for the Ocarina
-Intercepting the load functions for the textures and borrowing a trick from the Deku Nuts to change the text id at runtime
-
-For text IDs, the whole item descriptions begin at text ID 1700. There are some entries at 170B, 1711 and 171C, but for this specific hack, text IDs $2B, $2C and $2D were used:
-
-3E is Dungeon Map, B3 is overworld Map, 44 Fishing rod, 
-
-TEXTS FOR INSTRUMENTS REASSIGNED TO THE FOLLOWING:
-Text ID $2B: Deku Pipes (with Slingshot/Granny's Drink icon as dummy)
-06 01 XX (Slingshot/Granny's Drink Icon $59 in Text Format)
-Text ID $2C: Goron Drums (with Blue Fire icon as dummy)
-06 01 64 (Blue Fire Icon $64 in Text Format)
-Text ID $2D: Zora Guitar (with Hylian Loach icon as dummy)
-06 01 70 (Hylian Loach Icon $70 in Text Format)
-
-
-TEXT RIPPED DIRECTLY FROM MAJORA'S MASK 3D (Second paragraph converted for N64):
-
-Goron Drums
-The traditional instrument of the
-Goron tribe. (Next box)
-Play it with (A) and the four (C)
-Buttons. Press (B) to stop.
-
-Zora Guitar / Guitar of Waves
-A soulful guitar from a Zora band.
-It's overflowing with good vibes. (Next box)
-Play it with (A) and the four (C)
-Buttons. Press (B) to stop.
-
-Deku Pipes
-Loud pipes that sprout forth from
-your Deku Scrub body. (Next box)
-Play it with (A) and the four (C)
-Buttons. Press (B) to stop.
-
-
-
-//------------------------------------------------------------------
-// 4th Heart Piece sound restoration
-//------------------------------------------------------------------
-
-Fkualol made a cheat code that restored the proper SFX for when Link obtains a 4th Heart Piece.
-
-To quote fkualol:
-	"In MM (J) the heart piece value gets set to 0 once you close the text box, while in MM (U) it gets set to 0 right after 4 is written to it. The game then checks if the heart piece value is 4 and sets the music sequence to 0x24 if it is, otherwise it'll use sequence 0x39. Luckily the code that sets it to 0 when the text box closes is still in the game, so you can "fix" this by changing a branch instruction.
-
-
-	81112F88 1000 <-- Changes BNE V1, T8, 0x80112FB0 to BEQ R0, R0, 0x80112FB0 (Stops heart piece value from getting 0'd immediately)
-
-
-	Edit: Another way of fixing this is by changing an LUI instruction.
-	81765866 0000 <-- Changes LUI AT, 0x4000 to LUI AT, 0x0000 (Sets the music sequence to 0x24 if heart piece value is 0)"
-
-
-Based on the cheat code, and by using Project64's debugger and memory viewer, I was able to locate the routine that handles this and make the change properly.
-Search for [14 78 FF 00 09] and change to [10 00 FF 00 09] in a compressed ROM v1.0.
-
-
-For a v1.0 Decompressed ROM (or any ROM), search for [14 78 00 09] and change to [10 00 00 09], should be at 0xBA94C8.
-
-
-//------------------------------------------------------------------
-//	Mushroom bottle bugfix
-//------------------------------------------------------------------
-
-Correct item reference when collecting Magical Mushrooms (Link would but away the bottle automatically due to this error)
-https://wiki.cloudmodding.com/mm/Talk:Ovl_player_actor/Get_Items
-
-Based on the cheat code, and by using Project64's debugger and memory viewer, I was able to locate the routine that handles this and make the change properly. In the decompressed v1.0 MM ROM (or any ROM), search for the following bytes and replace accordingly:
-02 3B FF 23 1D 6B -> 02 3B FF 23 1E 6B
-
-According to ozidual:
-"The magic mushroom Get Item ID is wrong, that's why Link puts away the bottle after catching one"
-
 
 //------------------------------------------------------------------
 //	Bomber Kid location in East Clock Town (Stock Pot Inn)
@@ -238,9 +39,15 @@ For the fix:
 
 Thanks to Dybbles from Romhacking for the cheat codes that allowed me to figure out their location in the ROM!
 
-Restore Cow Nose Ring In Alien Cutscene by Dybbles
-D140EAD4 ACC0
-8140EAD4 0000
+Restore Nose Ring To All Cows by Dybbles
+D1427AA0 ACC0
+81427AA0 0000
+D14162A0 ACC0
+814162A0 0000
+D1410560 ACC0
+81410560 0000
+D14162A0 ACC0
+814162A0 0000
 
 Restore Nose Ring To All Cows by Dybbles
 D1427AA0 ACC0
@@ -264,6 +71,45 @@ At 0x0107E200 and up to 0x0107FCA0, begins the zovl object "En_Invadepoh_Demo", 
 
 0x107F5C4 in v1.0/Redux Decompressed:
 AC C0 00 00 -> 00 00 00 00
+
+
+//------------------------------------------------------------------
+// 4th Heart Piece sound restoration
+//------------------------------------------------------------------
+
+Fkualol made a cheat code that restored the proper SFX for when Link obtains a 4th Heart Piece.
+
+To quote fkualol:
+	"In MM (J) the heart piece value gets set to 0 once you close the text box, while in MM (U) it gets set to 0 right after 4 is written to it. The game then checks if the heart piece value is 4 and sets the music sequence to 0x24 if it is, otherwise it'll use sequence 0x39. Luckily the code that sets it to 0 when the text box closes is still in the game, so you can "fix" this by changing a branch instruction.
+
+
+	81112F88 1000 <-- Changes BNE V1, T8, 0x80112FB0 to BEQ R0, R0, 0x80112FB0 (Stops heart piece value from getting 0'd immediately)
+
+
+	Edit: Another way of fixing this is by changing an LUI instruction.
+	81765866 0000 <-- Changes LUI AT, 0x4000 to LUI AT, 0x0000 (Sets the music sequence to 0x24 if heart piece value is 0)"
+
+
+Based on the cheat code, and by using Project64's debugger and memory viewer, I was able to locate the routine that handles this and make the change properly.
+Search for [14 78 FF 00 09] and change to [10 00 FF 00 09] in a compressed ROM v1.0.
+
+
+For a v1.0 Decompressed ROM (or any ROM), search for [14 78 00 09] and change to [10 00 00 09], should be at 0xBA94C8.
+
+
+//------------------------------------------------------------------
+//	Mushroom bottle bugfix
+//------------------------------------------------------------------
+
+Correct item reference when collecting Magical Mushrooms (Link would but away the bottle automatically due to this error)
+https://wiki.cloudmodding.com/mm/Talk:Ovl_player_actor/Get_Items
+
+Based on the cheat code, and by using Project64's debugger and memory viewer, I was able to locate the routine that handles this and make the change properly. In the decompressed v1.0 MM ROM (or any ROM), search for the following bytes and replace accordingly:
+02 3B FF 23 1D 6B -> 02 3B FF 23 1E 6B
+
+According to ozidual:
+"The magic mushroom Get Item ID is wrong, that's why Link puts away the bottle after catching one"
+
 
 
 //------------------------------------------------------------------
