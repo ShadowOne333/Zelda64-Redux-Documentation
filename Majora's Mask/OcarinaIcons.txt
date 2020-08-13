@@ -23,10 +23,17 @@ Fishing Rod -> A66AEC
 
 Replace Slingshot unused icon with the new Deku Pipes icon:
 Import "Pipes Icon (Comp).yaz0" at
-0xA3B9BC-0xA3C20C (Slingshot) OR 0xA4B49C-0xA4BC5C (Granny's Drink)
+0xA3B9BC-0xA3C20C (Slingshot) OR 0xA4B49C-0xA4BC5C (Hylian Loach)
 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Icon ID: 0B (For text formatting [XX])
-NOTE: The text formatting control code [06 01 XX] doesn't have any entry that uses the Slingshot nor the Granny's Drink. Some custom assembly code for this might be needed to make any of the two appear in the text box
+Icon ID: 0B (For text formatting [44] in place of Fishing Rod)
+NOTE: The text formatting control code [06 01 XX] doesn't have any entry that uses the Slingshot nor the Hylian Loach. Some custom assembly code for this might be needed to make any of the two appear in the text box. 
+For this, we need to repoint the Fishing Rod to the new Deku Pipes, so the Pipes can now be used in the control code. Each of the pointers need to have 0x2FC added to the pointer. Example:
+Deku Pipes actual location 0x4DAC in the yaz0 graphics file.
+Pointer (0xA36C3C): 00 00 4A B0, + 02 FC = 4DAC
+Change the Fishing Rod pointer to the new Deku Pipes pointer:
+00 02 FB E0 -> 00 00 4A B0
+
+POSSIBLE NEW ICONS: 4A (Recovery Heart), 3A (Helix Sword), 44 (Fishing Rod), 01-06 (Rupees), 0F (Big Magic Jar)
 
 Replace Blue Fire unused icon with the new Goron Drums icon:
 Import "Drums Icon (Comp).yaz0" at
@@ -40,22 +47,24 @@ Icon ID: 26 (For text formatting [70])
 
 
 //----- Instrument text graphics for Subscreen
-// Text Name Entry 00 (Hex) is "Ocarina of Time" (for reference)
+// Pointers for compressed Yaz0 item_names start at 0xA2765C in v1.0 Decompressed. They are each 4 bytes in length, with the first pointer (00 00 00 00) referring to 0xA27844 ($00-Ocarina of Time), where the first yaz0 graphic begins. Yaz0 graphics start at 0xA27844 for the item names.
 
-Replace 1st Unused Japanese text (after Light Arrows text) with the new Deku Pipes text:
+
+Replace 2nd Unused Japanese text (Slingshot, after Magic Beans text) with the new Deku Pipes text:
 Import "Pipes Text (Comp).yaz0" at
-0xA28204 - 0xA28473 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Text Name Entry: 05 (Hex, unknown how the game calls for these textures)
-
-Replace 2nd Unused Japanese text (after Magic Beans text) with the new Goron Drums text:
-Import "Drums Text (Comp).yaz0" at
 0xA28AF4 - 0xA28CA3 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Text Name Entry: 0B (Hex, unknown how the game calls for these textures)
 
-Replace 3rd Unused Japanese text (after Great Fairy's Sword text) with the new Zora Guitar text:
+Replace 1st Unused Japanese text (Fairy Ocarina, after Light Arrows text) and repoint the Blue Fire graphics to the new Goron Drums text:
+Import "Drums Text (Comp).yaz0" at
+0xA28204 - 0xA28473 - (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
+Change pointer for it too:
+0xA27674: 00 00 09 C0 -> 00 00 2B A0 
+0xA276D0: 00 00 2B A0 -> 00 00 09 C0
+
+Replace 4th Unused Japanese text (Hylian Loach, after Chateau Romani text) with the new Zora Guitar text:
 Import "Guitar Text (Comp).yaz0" at
-0xA29554 - 0xA297A3 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
-Text Name Entry: 11 (Hex, unknown how the game calls for these textures)
+0xA2B2B4 - 0xA2B4E4 (Pad out with FFs if there are leftover bytes until the next "Yaz0" string in Hex)
+
 
 
 

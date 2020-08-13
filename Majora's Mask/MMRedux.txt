@@ -1,6 +1,5 @@
 ///*************	MAJORA'S MASK REDUX	*************\\\
 
-
 //------------------------------------------------------------------
 //	Bomber Kid location in East Clock Town (Stock Pot Inn)
 //------------------------------------------------------------------
@@ -39,15 +38,9 @@ For the fix:
 
 Thanks to Dybbles from Romhacking for the cheat codes that allowed me to figure out their location in the ROM!
 
-Restore Nose Ring To All Cows by Dybbles
-D1427AA0 ACC0
-81427AA0 0000
-D14162A0 ACC0
-814162A0 0000
-D1410560 ACC0
-81410560 0000
-D14162A0 ACC0
-814162A0 0000
+Restore Cow Nose Ring In Alien Cutscene by Dybbles
+D140EAD4 ACC0
+8140EAD4 0000
 
 Restore Nose Ring To All Cows by Dybbles
 D1427AA0 ACC0
@@ -77,7 +70,8 @@ AC C0 00 00 -> 00 00 00 00
 // 4th Heart Piece sound restoration
 //------------------------------------------------------------------
 
-Fkualol made a cheat code that restored the proper SFX for when Link obtains a 4th Heart Piece.
+Fkualol made a cheat code for public use that restored the proper SFX for when Link obtains a 4th Heart Piece:
+https://www.tapatalk.com/groups/zelda64/mm-piece-of-heart-sequence-numbers-t969.html?sid=be5374d9252ef4f5c14b2678f97f5b30#p10168
 
 To quote fkualol:
 	"In MM (J) the heart piece value gets set to 0 once you close the text box, while in MM (U) it gets set to 0 right after 4 is written to it. The game then checks if the heart piece value is 4 and sets the music sequence to 0x24 if it is, otherwise it'll use sequence 0x39. Luckily the code that sets it to 0 when the text box closes is still in the game, so you can "fix" this by changing a branch instruction.
@@ -91,8 +85,9 @@ To quote fkualol:
 
 
 Based on the cheat code, and by using Project64's debugger and memory viewer, I was able to locate the routine that handles this and make the change properly.
-Search for [14 78 FF 00 09] and change to [10 00 FF 00 09] in a compressed ROM v1.0.
 
+
+Search for [14 78 FF 00 09] and change to [10 00 FF 00 09] in a compressed ROM v1.0.
 
 For a v1.0 Decompressed ROM (or any ROM), search for [14 78 00 09] and change to [10 00 00 09], should be at 0xBA94C8.
 
@@ -100,6 +95,8 @@ For a v1.0 Decompressed ROM (or any ROM), search for [14 78 00 09] and change to
 //------------------------------------------------------------------
 //	Mushroom bottle bugfix
 //------------------------------------------------------------------
+
+The fix for this bug is publicly available at the CloudModding website, which is a site that focus on hacking/modifying the Zelda 64 ROMs.
 
 Correct item reference when collecting Magical Mushrooms (Link would but away the bottle automatically due to this error)
 https://wiki.cloudmodding.com/mm/Talk:Ovl_player_actor/Get_Items
@@ -109,6 +106,17 @@ Based on the cheat code, and by using Project64's debugger and memory viewer, I 
 
 According to ozidual:
 "The magic mushroom Get Item ID is wrong, that's why Link puts away the bottle after catching one"
+
+
+//------------------------------------------------------------------
+//	Comma fix
+//------------------------------------------------------------------
+
+Ports the fixed comma for the font from a decompressed MM PAL ROM exactly at 0xAA0660.
+
+At 0xACC660 in a decompressed ROM:
+02 A3 00 00 00 00 00 00 06 40 00 00 00 00 00 00 00 ->
+00 F3 00 00 00 00 00 00 4F 60 00 00 00 00 00 00 24
 
 
 
@@ -151,16 +159,6 @@ ROM implementation into Majora's Mask US v1.0 by ShadowOne333:
 At 0xB9133E in a MM US v1.0 ROM:
 00 10 00 0E -> 01 0F 00 0E
 
-
-//------------------------------------------------------------------
-//	Comma fix
-//------------------------------------------------------------------
-
-Ports the fixed comma for the font, from a decompressed MM PAL ROM exactly at 0xAA0660.
-
-At 0xACC660 in a decompressed ROM:
-02 A3 00 00 00 00 00 00 06 40 00 00 00 00 00 00 00 ->
-00 F3 00 00 00 00 00 00 4F 60 00 00 00 00 00 00 24
 
 
 //------------------------------------------------------------------
