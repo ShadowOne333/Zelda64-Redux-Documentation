@@ -45,6 +45,12 @@ D140EAD4 ACC0
 Restore Nose Ring To All Cows by Dybbles
 D1427AA0 ACC0
 81427AA0 0000
+D14162A0 ACC0
+814162A0 0000
+D1410560 ACC0
+81410560 0000
+D14162A0 ACC0
+814162A0 0000 
 
 
 //---	ROM implementation by ShadowOne333
@@ -96,7 +102,7 @@ For a v1.0 Decompressed ROM (or any ROM), search for [14 78 00 09] and change to
 //	Mushroom bottle bugfix
 //------------------------------------------------------------------
 
-The fix for this bug is publicly available at the CloudModding website, which is a site that focus on hacking/modifying the Zelda 64 ROMs.
+The fix for this bug is publicly available at the CloudModding website, which is a site that focuses on hacking/modifying the Zelda 64 ROMs. The fix for this was done by ozidual.
 
 Correct item reference when collecting Magical Mushrooms (Link would but away the bottle automatically due to this error)
 https://wiki.cloudmodding.com/mm/Talk:Ovl_player_actor/Get_Items
@@ -167,5 +173,4 @@ At 0xB9133E in a MM US v1.0 ROM:
 
 At 0x2678007 (Decompressed, done through SceneTatl by ShadowOne333):
 00 -> 44
-
 
