@@ -1,5 +1,18 @@
 ///*************	MAJORA'S MASK REDUX	*************\\\
 
+NOTE: Most of the data between ROMs was located by using documentation found in CloudModding as the base:
+
+* Main Decompressed v1.0 ROM entire filelist:
+https://wiki.cloudmodding.com/mm/File_List/U_1.0
+* Scene, rooms and entrances lists for v1.0:
+https://wiki.cloudmodding.com/mm/Scene_Table/Internal/U_1.0
+https://wiki.cloudmodding.com/mm/Entrance_List_(U_1.0)
+* Actor list for v1.0:
+https://wiki.cloudmodding.com/mm/Actor_List_(U)
+
+Based on that documentation for MM ROM v1.0, we would then find the data file(s) that matched what we wanted to change or restore, and then find the corresponding file/data in other MM ROMs, then look for differences there as a starting point.
+Sometimes, some trial and error was done between ROMs to locate and pinpoint an exact fix from the other official releases, but most fixes or changes could be located without much trouble once the corresponding matching file was found in the other commercial ROMs.
+
 //------------------------------------------------------------------
 //	Bomber Kid location in East Clock Town (Stock Pot Inn)
 //------------------------------------------------------------------
