@@ -4,13 +4,12 @@
 Modify Goron Link to have Red-like tunic parts, and Zora Link to have Blue-like tunic parts (change Goron Link to have red tunic parts, and Zora Link's green parts changed to blue).
 
 // FOR GORON:
-
-Import "RedGoronTunic.bin" at 0x117C780 in v1.0/Redux MM
-MQ: 10827A0 - 10828A0
+Import "RedGoronTunic.bin" at the following addresses in v1.0/Redux MM:
+0x117C780 (Normal Goron)
+0x1186EB8 (Ball Goron)
 
 
 // FOR ZORA LINK:
-
 Palette change needed to change green hue to deep blue hue for ci8 textures:
 
 Insert the following bytes at 0x1197120 up to 0x1197160 in a Decompressed v1.0/Redux ROM:
