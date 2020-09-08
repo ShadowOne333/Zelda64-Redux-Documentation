@@ -22,8 +22,7 @@ D7 FF C7 BF 21 D1 33 1D 00 CB 00 87 BF 3F 01 ED 01 5F 02 7B 01 AB 01 1D 02 BF 02
 RGB16 textures:
 Import "ZoraBlueGradient.bin" at the following addresses:
 0x10FB0B0 (Green to Blue gradient)
-0x10FB4B0 (Green to Blue gradient)
-0x11A2028 (Green to Blue gradient)
+0x11A2228 (Green to Blue gradient)
 
 
 // IGNORE:	0x10FB4B0 (Yellow to Blue gradient)
