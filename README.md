@@ -1,5 +1,4 @@
-# Zelda64 Redux Documentation
-# by ShadowOne333
+# Zelda64 Redux Documentation (by ShadowOne333)
 
 The documentation listed in this repository is merely for research and educational purposes.
 
