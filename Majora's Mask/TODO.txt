@@ -1,7 +1,4 @@
-* Implement custom code so that when Link transforms into Deku, Goron or Zora, custom icons for Guitar, Drums and Pipes replace the Ocarina of Time when transformed, alongside:
-
-1) Proper description for the items taken from Majora's Mask 3D
-2) Proper item icons at the Subscreen and HUD (Dpad and C-Buttons)
-3) Proper item names in the Subscreen (bottom of the screen)
-(Check "MMRedux.txt" under the "Ocarina custom icons" section for info regarding locations and IDs for the assets to be called)
-
+* Implement custom code so that when Link transforms into Deku, Goron or Zora, custom icons for Guitar, Drums and Pipes replace the Ocarina of Time when transformed. 
+Item icons in Subscreen, custom text boxes with the proper item descriptions + textbox item icon (different from the item icon in subscreen), and custom item name graphics are all working and replace the following items:
+Slingshot ($0B), Blue Fire ($1C) and Hylian Loach ($26).
+(Check "OcarinaIcons.txt" for info regarding locations and other data that could be helpful)
