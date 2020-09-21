@@ -11,7 +11,6 @@ FF C7 16 74 00 89 00 00 00 00 00 00 C0 00 D4 42
 (0x65D000 - 0x668AB6 in Japanese v1.0 Decompressed ROM)
 
 
-The fix is an EXACT port of the Japanese release.
-Given the size of the change, the whole range can be copy-pasted from the Japanese ROM into a v1.0 USA ROM (or with my custom "Zora Physics Fix.bin" file that should replace animation data for Link), and should be around 0xBAB6 bytes in length, starting at 0x0065D000 and ending at 0x00668AB5 in a clean decompressed ROM.
-
+The fix is almost an EXACT port of the Japanese release.
+Given the size of the change, I included a "Zora Physics Fix.bin" file that should replace the start of the animation data for Link, and should be around 0xBAB6 bytes in length, starting at 0x0065D000 and ending at 0x00668AB5 in a clean decompressed ROM.
 As long as the start of the animation data is located properly, replacing the proper data shouldn't be of any trouble.
