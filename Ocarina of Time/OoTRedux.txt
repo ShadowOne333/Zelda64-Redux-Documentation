@@ -1,8 +1,54 @@
 ///*************	OCARINA OF TIME REDUX	*************\\\
 
+//------------------------------------------------------------------
+//	Fire Temple song from v1.2 (and other versions)
+//------------------------------------------------------------------
+
+DMA Table changes:
+
+At 0x7460 (DMA Table, Pointer to AudioBank):
+00 00 D3 90  00 02 9D E0  00 00 D3 90  00 00 00 00 
+change to:
+00 00 D3 90  00 03 91 30  00 00 D3 90  00 00 00 00
+
+At 0x7470 (DMA Table, Pointer to AudioSeq):
+00 02 9D E0  00 07 94 70  00 02 9D E0  00 00 00 00
+change to:
+00 03 91 30  00 08 8B B0  00 03 91 30  00 00 00 00
+
+At 0x7480 (DMA Table, Pointer to AudioTable):
+00 07 94 70  00 4D 9F 40  00 07 94 70  00 00 00 00
+change to:
+00 08 8B B0  00 4D 9F 40  00 08 8B B0  00 00 00 00
+
+
+Update the MIPS assembly that loads AudioSeq:
+
+At 0xB2E82C:
+3C 05 00 03 24 A5 9D E0 -> 3C 05 00 04 24 A5 91 30
+
+Update the MIPS assembly that loads AudioTable:
+At 0xB2E854:
+3C 05 00 08 24 A5 94 70 -> 3C 05 00 09 24 A5 8B B0
+
+
+Actual data:
+
+Copy the 12FireTemple.bin file at 0x0000D390. (Yes, it's 5MB in size)
+Make sure it ends at 0x004D9F50! 
+
+AudioBank pointer table - B896A0 (420 bytes)
+Copy 12AudioBankPointers.bin at 0xB896A0 up to 0xB89AC0
+
+AudioSeq pointer table - B89AD0 (6F0 bytes)
+Copy 12AudioSeqPointers.bin at 0xB89AD0 up to 0xB8A1C0
+
+AudioTable pointer table - B8A1C0 (80 bytes)
+Copy 12AudioSeqPointers.bin at 0xB8A1C0 up to 0xB8A240
+
 
 //------------------------------------------------------------------
-//	Undo RNG-specific hacks for Redux
+//	Undo RNG hacks
 //------------------------------------------------------------------
 
 //--- Undo Dampe Digging 1st Try hack:
@@ -69,9 +115,9 @@ Simply import all of the .bin files accordingly into the specified addresses.
 0x1616000 - 0x1616400: 20.bin
 0x2F64E38 - 0x2F65E38: 21.bin (Spirit Temple Boss Room 1)
 0x2F73700 - 0x2F74700: 21.bin (Spirit Temple Boss Room 2)
+0x1636940 - 0x1637140: 22.bin (Spirit Temple 1st Room Elevator)
 
 * Refer to "Uncensored MQ Textures.txt" inside the "Master Quest" folder for importing 1.bin, 7.bin, 11.bin and 12.bin specifically for applying these texture for importing into a Master Quest project.
-
 
 //---------------------------------------------------------------
 //	Remove File Select Item Icons
@@ -136,54 +182,6 @@ The ROM change is quite small, because that code gets called each time, but at d
 OoT v1.0/Redux Decompressed:
 0xEF3E68
 AC C0 -> 00 00
-
-
-//------------------------------------------------------------------
-//	Fire Temple song from v1.2 (and other versions)
-//------------------------------------------------------------------
-
-DMA Table changes:
-
-At 0x7460 (DMA Table, Pointer to AudioBank):
-00 00 D3 90  00 02 9D E0  00 00 D3 90  00 00 00 00 
-change to:
-00 00 D3 90  00 03 91 30  00 00 D3 90  00 00 00 00
-
-At 0x7470 (DMA Table, Pointer to AudioSeq):
-00 02 9D E0  00 07 94 70  00 02 9D E0  00 00 00 00
-change to:
-00 03 91 30  00 08 8B B0  00 03 91 30  00 00 00 00
-
-At 0x7480 (DMA Table, Pointer to AudioTable):
-00 07 94 70  00 4D 9F 40  00 07 94 70  00 00 00 00
-change to:
-00 08 8B B0  00 4D 9F 40  00 08 8B B0  00 00 00 00
-
-
-Update the MIPS assembly that loads AudioSeq:
-
-At 0xB2E82C:
-3C 05 00 03 24 A5 9D E0 -> 3C 05 00 04 24 A5 91 30
-
-Update the MIPS assembly that loads AudioTable:
-At 0xB2E854:
-3C 05 00 08 24 A5 94 70 -> 3C 05 00 09 24 A5 8B B0
-
-
-Actual data:
-
-Copy the 12FireTemple.bin file at 0x0000D390. (Yes, it's 5MB in size)
-Make sure it ends at 0x004D9F50! 
-
-AudioBank pointer table - B896A0 (420 bytes)
-Copy 12AudioBankPointers.bin at 0xB896A0 up to 0xB89AC0
-
-AudioSeq pointer table - B89AD0 (6F0 bytes)
-Copy 12AudioSeqPointers.bin at 0xB89AD0 up to 0xB8A1C0
-
-AudioTable pointer table - B8A1C0 (80 bytes)
-Copy 12AudioSeqPointers.bin at 0xB8A1C0 up to 0xB8A240
-
 
 //---------------------------------------------------------------
 //	Fix Young Link eye textures (MM Model)
