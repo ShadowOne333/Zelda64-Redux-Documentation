@@ -1,5 +1,6 @@
 // N64 "Ocarina of Time" Widescreen Hack by gamemasterplc:
 // Port to properly decompressed 1.0 ROM by GhostlyDark
+// Thanks to Admentus for helping out on the Epona carrots position
 
 arch n64.cpu
 endian msb // N64 MIPS requires Big-Endian Encoding (Most Significant Bit)
@@ -516,6 +517,7 @@ dw ($E4000000|SCREEN_WIDTH << 14| SCREEN_HEIGHT << 2) //Texture Rectangle for Sa
 
 //Manual patching
 //B124E3 --> A8
+//B5834B --> A4 (Epona carrots position)
 
 
 
