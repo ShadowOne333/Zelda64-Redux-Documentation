@@ -566,9 +566,7 @@ dw ($E4000000|SCREEN_WIDTH << 14|SCREEN_HEIGHT << 2) //Texture Rectangle for San
 //Granny story image data
 //2EDB000 --> Inject 16_9-story-static.bin
 
-
-
-//Notes: DO NOT PATCH. Need to know what these are doing first.
+//Mostly unknown. Some of them fix light effects.
 //B98E2F --> 54
 //BA4F6B --> A7
 //BD81DE --> D4
