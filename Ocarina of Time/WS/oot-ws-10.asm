@@ -514,7 +514,6 @@ dw ($E4000000|SCREEN_WIDTH << 14| SCREEN_HEIGHT << 2) //Texture Rectangle for Sa
 
 
 //Manual patching
-//B124E3 --> A8
 //B5834B --> A4 (Epona carrots position)
 //B584EF --> ED (Start button position)
 
