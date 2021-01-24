@@ -1,6 +1,7 @@
 // N64 "Ocarina of Time" Widescreen Hack by gamemasterplc:
 // Port to properly decompressed 1.0 ROM by GhostlyDark
 // Thanks to Admentus for helping out on the Epona carrots position
+// Thanks to Marcelo20XX for the Start Button position
 
 arch n64.cpu
 endian msb // N64 MIPS requires Big-Endian Encoding (Most Significant Bit)
@@ -17,12 +18,15 @@ constant DEFAULT_RAM_SIZE(4194304)
 
 origin $00006FC8
 dw SCREEN_WIDTH //VI_WIDTH Register
+//00 00 01 40 --> 00 00 01 A8
 
 origin $00006FE0
 dw (SCREEN_WIDTH*512)/320 //VI_X_SCALE Register
+//00 00 02 00 --> 00 00 02 6A
 
 origin $00006FE8
 dw SCREEN_WIDTH*2 //VI_ORIGIN Offset
+//00 00 02 80 --> 00 00 03 50
 
 origin $00A95B38
 lui at, 0xC3D4 //Minimum X Position of Z Targeting Target (-424.0f)
@@ -100,12 +104,6 @@ addiu t7, v0, 8 //Run a Replaced Opcode
 sw t7, 688(a1) //Run another Replaced Opcode
 li t6, ($E4000000|(SCREEN_WIDTH-50)+8 << 14|(SCREEN_HEIGHT-86)+8 << 2) //Lower-Right of Zora's Fountain Dungeon Icon
 li t8, ((SCREEN_WIDTH-50) << 14|SCREEN_HEIGHT-86 << 2) //Upper-Left of Zora's Fountain Dungeon Icon
-
-//origin $00??????
-//addiu t7, t0, 8 //Run a Replaced Opcode
-//sw t7, 688(s1) //Run another Replaced Opcode
-//li t6, ($E4000000|(SCREEN_WIDTH-188)+22 << 14|(17+22) << 2) //Lower-Right of Start Button
-//li t9, ((SCREEN_WIDTH-188) << 14|(17) << 2) //Upper-Left of Start Button
 
 origin $00AEB618
 addiu t7, r0, SCREEN_WIDTH //Viewport Width of Scaling/Rotating 2D Elements
@@ -206,11 +204,11 @@ addiu t2, r0, (SCREEN_WIDTH-158) //X Position of B Button Item Quantity
 origin $00B57F00
 addiu v1, r0, (SCREEN_WIDTH-134) //X Position of A Button
 
-//origin $00B58490
-//addiu t8, r0, SCREEN_WIDTH-198 //X Position of Start Button Text in Japanese
+origin $00B58490
+addiu t8, r0, SCREEN_WIDTH-198 //X Position of Start Button Text in Japanese
 
-//origin $00B5849C
-//addiu t6, r0, SCREEN_WIDTH-200 //X Position of Start Button Text in English
+origin $00B5849C
+addiu t6, r0, SCREEN_WIDTH-200 //X Position of Start Button Text in English
 
 origin $00B582DC
 addiu t6, r0, SCREEN_WIDTH-73 //X Position of C-Up Navi Text
@@ -518,6 +516,7 @@ dw ($E4000000|SCREEN_WIDTH << 14| SCREEN_HEIGHT << 2) //Texture Rectangle for Sa
 //Manual patching
 //B124E3 --> A8
 //B5834B --> A4 (Epona carrots position)
+//B584EF --> ED (Start button position)
 
 
 
