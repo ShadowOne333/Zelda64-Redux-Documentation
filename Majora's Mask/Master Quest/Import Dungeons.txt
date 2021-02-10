@@ -1,0 +1,56 @@
+--- HOW TO EXTRACT FILES ---
+1. Apply "master_quest.bps" on comrpessed Majora's Mask US Rev 0 (32 MB)
+2. Decompress  the patched Master Quest ROM with Aegh (results in a 152 MB ROM)
+3. Use HxD, go to the DMA Table offset and use it's value to go the offset for the .zscene of .zmap offset
+
+--- HOW TO REPLACE IN VANILLA ROM ---
+1. Use HxD, go to the DMA Table offset and use it's value to go the offset for the .zscene of .zmap offset
+2. Copy the .zscene and each .zmap in their respective offsets
+
+--- HOW THE DMA TABLE WORKS ---
+DMA Table for each temple starts with the .zscene. Each DMA entry is 16 bits (one full row).
+Each subsequent row is a .zmap.
+If a dungeon has 13 .zmap files then you need to follow 14 rows in total (1 .zscene + 13 .zmap files)
+
+
+
+DMA Table values have remained unchanged, so they don't have to be changed.
+Only the .zscene and .zmap files got altered.
+
+The Master Quest patch belongs to DeathBasket.
+Source: https://www.youtube.com/watch?v=ubXjLcVN47E&list=PL_6N2MizjhEumN215IP47ZwpBlRi06rpO
+
+
+
+--- WOODFALL TEMPLE ---
+Starts at DMA Table at:		0x1F080
+Scene DMA Table entry:		0xC5A390
+Amount of zmaps:		13
+
+
+
+--- SNOWHEAD TEMPLE ---
+Starts at DMA Table at:		0x1F290
+Scene DMA Table entry:		0xC5A3F0
+Amount of zmaps:		14
+
+
+
+--- GREAT BAY TEMPLE ---
+Starts at DMA Table at:		0x1FA90
+Scene DMA Table entry:		0xC5A670
+Amount of zmaps:		12
+
+
+
+--- STONE TOWER TEMPLE ---
+Starts at DMA Table at:		0x1EE70
+Scene DMA Table entry:		0xC5A340
+Amount of zmaps:		16
+
+
+
+--- STONE TOWER TEMPLE - INVERTED ---
+Starts at DMA Table at:		0x1EF60
+Scene DMA Table entry:		0xC5A360
+Amount of zmaps:		12
