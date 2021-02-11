@@ -54,3 +54,31 @@ Amount of zmaps:		16
 Starts at DMA Table at:		0x1EF60
 Scene DMA Table entry:		0xC5A360
 Amount of zmaps:		12
+
+
+
+--- PIRATES' FORTRESS - EXTERIOR ---
+Starts at DMA Table at:		0x1F880
+Scene DMA Table entry:		0xC5A590
+Amount of zmaps:		1
+
+
+
+--- PIRATES' FORTRESS - INTERIOR ---
+Starts at DMA Table at:		0x1F3A0
+Scene DMA Table entry:		0xC5A410
+Amount of zmaps:		15
+
+
+
+--- BENEATH THE WELL ---
+Starts at DMA Table at:		0x1FBC0
+Scene DMA Table entry:		0xC5A690
+Amount of zmaps:		14
+
+
+
+--- ANCIENT CASLTE OF IKANA ---
+Starts at DMA Table at:		0x1F180
+Scene DMA Table entry:		0xC5A3B0
+Amount of zmaps:		10
