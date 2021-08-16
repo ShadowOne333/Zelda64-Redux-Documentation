@@ -97,7 +97,7 @@ origin $00ADD260
 addiu a0, a0, SCREEN_WIDTH-116 //X Offset for Dungeon Map Icons
 
 origin $00AE20F4
-j $80106730 //Call Function to Adjust Dungeon Minimap Arrows
+j $801060A0 //Call Function to Adjust Dungeon Minimap Arrows
 
 origin $00AE33D8
 addiu t7, v0, 8 //Run a Replaced Opcode
@@ -376,9 +376,9 @@ dh SCREEN_WIDTH-61 //X Position of Lake Hylia Dungeon Icon
 origin $00B6CA26
 dh SCREEN_WIDTH-77 //X Position of A Third Dungeon Icon
 
-origin $00B7C000 //Equivalent to 0x80106730 in RAM
+origin $00B7C000 //Equivalent to 0x801060A0 in RAM
 lh t8, 0(t7) //Get Position of Arrows for Dungeon Minimap
-j $8006C7FC //Return to Game Code
+j $8006C19C //Return to Game Code
 addiu t8, t8, ((SCREEN_WIDTH-320)*5) //Update Position for Dungeon Minimap Arrows
 
 origin $00B890E0
