@@ -15,6 +15,7 @@ constant SCREEN_HEIGHT(240)
 constant BYTES_PER_PIXEL(2)
 constant EXPANSION_RAM_SIZE(8388608)
 constant DEFAULT_RAM_SIZE(4194304)
+//constant DEFAULT_RAM_SIZE(4194304 + 131072) //0x20000 max payload size (Redux)
 
 origin $00006FC8
 dw SCREEN_WIDTH //VI_WIDTH Register
@@ -264,6 +265,12 @@ addiu t9, r0, SCREEN_WIDTH-48 //X Position of C-Right Item Quantity
 origin $00B58E88
 addiu t9, r0, ((SCREEN_WIDTH/2)-96) //X Position of Game Over Text
 
+origin $00B58348
+dw 0x240F00A4 //X Position of Epona Carrots
+
+origin $00B584EC
+dw 0x241900ED //X Position of Start Button
+
 origin $00B6C814
 dh SCREEN_WIDTH-104 //X Position of Hyrule Field Minimap
 dh SCREEN_WIDTH-104 //X Position of Kakiriko Village Minimap
@@ -510,14 +517,3 @@ dw ((SCREEN_WIDTH/2)-47 << 14|(SCREEN_HEIGHT/2)-40 << 2) //Upper-Left of Present
 
 origin $00F6BB10
 dw ($E4000000|SCREEN_WIDTH << 14| SCREEN_HEIGHT << 2) //Texture Rectangle for Sand Effect in Haunted Wasteland
-
-
-
-//Manual patching
-//B5834B --> A4 (Epona carrots position)
-//B584EF --> ED (Start button position)
-
-
-
-//Redux patching
-//3480CCF --> A8 (fix blackscreen, caused by 0x0140 in init.asm)

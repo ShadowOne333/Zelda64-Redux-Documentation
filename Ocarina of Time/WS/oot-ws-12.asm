@@ -131,7 +131,7 @@ li t7, ($80000000|DEFAULT_RAM_SIZE) //Background Texture Address for Pause Scree
 origin $00B12484
 addiu t9, r0, SCREEN_WIDTH //Fadeout View Width
 
-origin $00B1DBA4
+origin $00B12590
 addiu a1, r0, SCREEN_WIDTH //Framebuffer Width for Pause Screen
 
 origin $00B12994
@@ -265,6 +265,9 @@ addiu t9, r0, SCREEN_WIDTH-48 //X Position of C-Right Item Quantity
 
 origin $00B58E88
 addiu t9, r0, ((SCREEN_WIDTH/2)-96) //X Position of Game Over Text
+
+origin $00B58360
+dw 0x240F00A4 //X Position of Epona Carrots
 
 origin $00B6C814
 dh SCREEN_WIDTH-104 //X Position of Hyrule Field Minimap
@@ -512,15 +515,3 @@ dw ((SCREEN_WIDTH/2)-47 << 14|(SCREEN_HEIGHT/2)-40 << 2) //Upper-Left of Present
 
 origin $00F6BB10
 dw ($E4000000|SCREEN_WIDTH << 14| SCREEN_HEIGHT << 2) //Texture Rectangle for Sand Effect in Haunted Wasteland
-
-
-
-//Fixing shit manually
-//B1DBA4 --> E7 A6 00 10
-//F02FF0 --> 39 C7 21 03 42 E2 0B 63 11 19 63 10 75 10 C1 A5
-
-
-
-//Manual patching
-//B12593 --> A8
-//B58363 --> A4 (Epona carrots position)
