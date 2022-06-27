@@ -15,7 +15,7 @@ constant SCREEN_HEIGHT(240)
 constant BYTES_PER_PIXEL(2)
 constant EXPANSION_RAM_SIZE(8388608)
 constant DEFAULT_RAM_SIZE(4194304)
-//constant DEFAULT_RAM_SIZE(4194304 + 131072) //0x20000 max payload size (Redux)
+//constant DEFAULT_RAM_SIZE(4194304 + 1048576) //Redux payload sits at 0x400000/4194304
 
 origin $00006FC8
 dw SCREEN_WIDTH //VI_WIDTH Register
