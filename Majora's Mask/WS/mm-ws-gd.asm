@@ -271,10 +271,10 @@ origin $00C0AE14
 ori a0, a0, (((SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL*2)+63) & 0xFFFF) //Size of Depth Buffers for Allocation Lower-Half
 
 origin $00C0AE28
-lui a0, ((SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL) >> 16) //Offset of Second Depth Buffer Upper-Half
+lui at, ((SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL) >> 16) //Offset of Second Depth Buffer Upper-Half
 
 origin $00C0AE30
-ori a0, a0, ((SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL) & 0xFFFF) //Offset of Second Depth Buffer Lower-Half
+dh 0x3421, ((SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL) & 0xFFFF) //Offset of Second Depth Buffer Lower-Half
 
 origin $00C0ED00
 addiu t2, r0, SCREEN_WIDTH //Internal Rendering Framebuffer Width
@@ -291,7 +291,8 @@ origin $00C0F5F8
 addiu s1, r0, SCREEN_WIDTH //Width of Screen for No Expansion Pak Screen Clear
 
 origin $00C0F664
-li a1, 0x2072650 //Virtual ROM Address of No Expansion Pak Screen Assets
+dw 0x3C0501EB
+dw 0x34A5A000
 li a0, ($80000000|DEFAULT_RAM_SIZE-(SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL)-4736) //Load Address of No Expansion Pak Screen Assets
 
 origin $00C0F67C
@@ -536,50 +537,105 @@ dw ($E4000000|SCREEN_WIDTH << 14|SCREEN_HEIGHT << 2) //Texture Rectangle for San
 
 
 
-//Patch manually.
+origin $00BB169A
+dh 0x00AB //Final countdown background
 
-//BB169B --> AB //Final countdown background
-//C56180 --> 00 B3 00 BC 00 C4 00 CB 00 D4 00 DC 00 E3 00 EC //Final countdown numbers
+origin $00C56180 //Final countdown numbers
+dh 0x00B3
+dh 0x00BC
+dh 0x00C4
+dh 0x00CB
+dh 0x00D4
+dh 0x00DC
+dh 0x00E3
+dh 0x00EC
 
-//Cutscene effect fixes
-//C0AE16 --> B0 //Redux (reduce corruption)
-//C0AE29 --> 01
-//C0AE31 --> 21
-//C0F666 --> 01 EB 34 A5 A0 00
+origin $00C99772
+dh 0xF650 //Warp screen black overlay
 
-//C99773 --> 50 //Warp screen black overlay
-//C99787 --> 19 //Warp screen black overlay
+origin $00C99786
+dh 0x0019 //Warp screen black overlay
 
-//F06E4B --> A7 //Skull Kid timer position
+origin $00F06E4A
+dh 0x00A7 //Skull Kid timer position
 
-//Granny story DMA changes
-//1A680 --> 00 A9 A0 00 00 A9 A0 10 FF FF FF FF FF FF FF FF
-//20530 --> 02 ED B0 00 02 F0 CF 00 02 ED B0 00 00 00 00 00 02 F0 D0 00 02 F0 D0 10 FF FF FF FF FF FF FF FF 02 F0 E0 00 02 F0 E0 10 FF FF FF FF FF FF FF FF 02 F0 F0 00 02 F0 F0 10 FF FF FF FF FF FF FF FF 02 F1 00 00 02 F1 00 10 FF FF FF FF FF FF FF FF 02 F1 10 00 02 F1 10 10 FF FF FF FF FF FF FF FF 02 F1 20 00 02 F1 20 10 FF FF FF FF FF FF FF FF 02 F1 30 00 02 F1 30 10 FF FF FF FF FF FF FF FF 02 F1 40 00 02 F1 40 10 FF FF FF FF FF FF FF FF 02 F1 50 00 02 F1 50 10 FF FF FF FF FF FF FF FF 02 F1 60 00 02 F1 60 10 FF FF FF FF FF FF FF FF 02 F1 70 00 02 F1 70 10 FF FF FF FF FF FF FF FF 02 F1 80 00 02 F1 80 40 FF FF FF FF FF FF FF FF //vanilla
-//20530 --> 02 ED B0 00 02 F0 CF 00 02 ED B0 00 00 00 00 00 02 EE 70 00 02 EE 70 40 FF FF FF FF FF FF FF FF 02 F0 D0 00 02 F0 D0 10 FF FF FF FF FF FF FF FF 02 F0 E0 00 02 F0 E0 10 FF FF FF FF FF FF FF FF 02 F0 F0 00 02 F0 F0 10 FF FF FF FF FF FF FF FF 02 F1 00 00 02 F1 00 10 FF FF FF FF FF FF FF FF 02 F1 10 00 02 F1 10 10 FF FF FF FF FF FF FF FF 02 F1 20 00 02 F1 20 10 FF FF FF FF FF FF FF FF 02 F1 30 00 02 F1 30 10 FF FF FF FF FF FF FF FF 02 F1 40 00 02 F1 40 10 FF FF FF FF FF FF FF FF 02 F1 50 00 02 F1 50 10 FF FF FF FF FF FF FF FF 02 F1 60 00 02 F1 60 10 FF FF FF FF FF FF FF FF 02 F1 70 00 02 F1 70 10 FF FF FF FF FF FF FF FF 02 F1 80 00 02 F1 80 40 FF FF FF FF FF FF FF FF 03 80 00 00 03 83 00 00 03 80 00 00 00 00 00 00 //Redux
-//20530 --> 02 ED B0 00 02 F0 CF 00 02 ED B0 00 00 00 00 00 02 ED C0 00 02 ED C0 10 FF FF FF FF FF FF FF FF 02 ED D0 00 02 ED D0 10 FF FF FF FF FF FF FF FF 02 ED E0 00 02 ED E0 10 FF FF FF FF FF FF FF FF 02 ED F0 00 02 ED F0 10 FF FF FF FF FF FF FF FF 03 80 00 00 03 86 00 00 03 80 00 00 00 00 00 00 03 90 00 00 03 90 0E 50 03 90 00 00 00 00 00 00 03 90 10 00 03 90 11 00 03 90 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 EE 70 00 02 EE 70 40 FF FF FF FF FF FF FF FF //Redux 2021-03
+origin $0001A680 //Granny story DMA changes
+dw 0x00A9A000
+dw 0x00A9A010
+dw 0xFFFFFFFF
+dw 0xFFFFFFFF
 
-//Granny story 
-//A9A000 --> 67 19 00 03 25 F8 FF FF FF A0 B8 00 01 80 A3 00 EF
-//BB5787 --> A8 //Granny story width
-//BB5927 --> 6A //Granny story transition
-//BB75BE --> 02 EE 3C 0E 02 F1 24 63 B0 00 25 CE CF
-//C562CA --> 8D 80 07 03 1B 00 07 03 1D
+origin $00020530 //Granny story DMA changes
+dw 0x02EDB000
+dw 0x02F0CF00
+dw 0x02EDB000
+dw 0x00000000
 
-//Granny story image data
-//2EDB000 --> Inject 16_9-story-static.bin
+origin $00A9A000
+dw 0x67190003
+dw 0x25F8FFFF
+dw 0xFFA0B800
+dw 0x0180A300
+dh 0xEF02
 
-//Mostly unknown. Some of them fix light effects.
-//B98E2F --> 54
-//BA4F6B --> A7
-//BD81DE --> D4
-//BD8247 --> 13
-//BD827F --> D3
-//BD82AF --> D4
-//BD82E7 --> D4
-//BD82FF --> 02
-//BD830F --> 6A
-//BD836A --> 06 A0
-//BD840A --> 34 B8
-//BEC8FE --> 00 33
-//BECA16 --> 00 33
-//BF06BF --> 61
+origin $00BB5786
+dh 0x01A8 //Granny story width
+
+origin $00BB5926
+dh 0xF66A //Granny story transition
+
+origin $00BB75BE 
+dh 0x02EE
+dw 0x3C0E02F1
+dw 0x2463B000
+dw 0x25CECF00
+
+origin $00C562CA
+dh 0x8D80
+dw 0x07031B00
+dw 0x07031D00
+
+origin $02EDB000
+insert "16_9-story-static.bin" //Granny story image data
+
+origin $00B98E2E //Fix light effects
+dh 0x4354
+
+origin $00BA4F6A
+dh 0x00A7
+
+origin $00BD81DE
+dh 0xD400
+
+origin $00BD8246
+dh 0x0013
+
+origin $00BD827E
+dh 0x00D3
+
+origin $00BD82AE
+dh 0x00D4
+
+origin $00BD82E6
+dh 0x01D4
+
+origin $00BD82FE
+dh 0x0002
+
+origin $00BD830E
+dh 0xE46A
+
+origin $00BD836A
+dh 0x06A0
+
+origin $00BD840A
+dh 0x34B8
+
+origin $00BEC8FE
+dh 0x0033
+
+origin $00BECA16
+dh 0x0033
+
+origin $00BF06BE
+dh 0x0061
