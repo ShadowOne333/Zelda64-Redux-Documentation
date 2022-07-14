@@ -4,7 +4,7 @@
 
 arch n64.cpu
 endian msb // N64 MIPS requires Big-Endian Encoding (Most Significant Bit)
-output "Legend of Zelda, The - Ocarina of Time v1.2 WS GhostlyDark.z64", create
+output "Ocarina of Time v1.2 WS GhostlyDark.z64", create
 origin $00000000; insert "ootdec12.z64" // Include Decompressed 1.2 Legend of Zelda, The - Ocarina of Time ROM
 
 include "LIB/N64.INC" // Include N64 Definitions
@@ -145,6 +145,9 @@ lui at, 0x4354 //Viewport Width for Alternate 3D to 2D Conversion  (212.0f)
 
 origin $00B14E14
 nop //Fix Display List Buffer Overflow on Pause Screen
+
+origin $00B15E80
+nop //Fix Equipment Preview Corruption on Pause Screen
 
 origin $00B16A0C
 lui a3, (($80000000|DEFAULT_RAM_SIZE) >> 16) //Depth Buffer Address Upper-Half for Segment Addressing
