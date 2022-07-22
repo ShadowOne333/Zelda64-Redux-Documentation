@@ -1,7 +1,7 @@
-// N64 "Ocarina of Time" Widescreen Hack by gamemasterplc:
-// Port to properly decompressed 1.0 ROM by GhostlyDark
-// Thanks to Admentus for helping out on the Epona carrots position
-// Thanks to Marcelo20XX for the Start Button position
+// gamemasterplc: N64 "Ocarina of Time" Widescreen Hack
+// GhostlyDark: Port to ndec decompressed ROM plus improvements
+// Admentus: Epona carrots position
+// Marcelo20XX: Start Button position
 
 arch n64.cpu
 endian msb // N64 MIPS requires Big-Endian Encoding (Most Significant Bit)
@@ -447,6 +447,15 @@ lui at, 0x43C5 //X Position of Right Arrow in Shops (394.0f)
 
 origin $00C700A4
 lui at, 0x43BD //X Position of Right Arrow Analog Stick in Shops (378.0f)
+
+origin $00DE1A0E
+dh 0xF6B7 //Fire Arrow overlay width (0xF64F)
+
+origin $00DE38F6
+dh 0xF6B7 //Ice Arrow overlay width (0xF64F)
+
+origin $00DE57D2
+dh 0xF6B7 //Light Arrow overlay width (0xF64F)
 
 origin $00E6C2FC
 addiu t8, r0, ((SCREEN_WIDTH/2)-41) //X Position of Press Start Text
