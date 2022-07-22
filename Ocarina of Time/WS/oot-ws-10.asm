@@ -448,6 +448,9 @@ lui at, 0x43C5 //X Position of Right Arrow in Shops (394.0f)
 origin $00C700A4
 lui at, 0x43BD //X Position of Right Arrow Analog Stick in Shops (378.0f)
 
+origin $00CFB43A
+dh 0xF6B7 //Din's Fire overlay width (0xF64F)
+
 origin $00DE1A0E
 dh 0xF6B7 //Fire Arrow overlay width (0xF64F)
 
