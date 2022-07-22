@@ -1,5 +1,5 @@
 // N64 "Majora's Mask" Widescreen Hack by gamemasterplc
-// Port to properly decompressed ROM and additional work by GhostlyDark
+// Port to ndec decompressed ROM plus additional work by GhostlyDark
 
 arch n64.cpu
 endian msb // N64 MIPS requires Big-Endian Encoding (Most Significant Bit)
@@ -519,6 +519,9 @@ addiu s2, r0, ((SCREEN_WIDTH/2)-40) //X Position of No Controller Text Shadow
 
 origin $00DE153C
 addiu s2, r0, ((SCREEN_WIDTH/2)-41) //X Position of No Controller Text
+
+origin $00DF4AAE
+dh 0xE46A //Song of Storms Effect (0xE450)
 
 origin $00D24E20 //D24E23 --> C5
 lui at, 0x43C5 //X Position of Right Arrow in Trading Post
