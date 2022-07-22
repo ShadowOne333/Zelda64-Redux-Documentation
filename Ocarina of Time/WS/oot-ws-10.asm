@@ -529,5 +529,8 @@ origin $00E9A3E8
 dw ($E4000000|(SCREEN_WIDTH/2)+48 << 14|(SCREEN_HEIGHT/2)-25 << 2) //Lower-Right of Presented By Text
 dw ((SCREEN_WIDTH/2)-47 << 14|(SCREEN_HEIGHT/2)-40 << 2) //Upper-Left of Presented By Text
 
+origin $00EB4A62
+dh 0xE46A //Song of Storms Effect (0xE450)
+
 origin $00F6BB10
 dw ($E4000000|SCREEN_WIDTH << 14| SCREEN_HEIGHT << 2) //Texture Rectangle for Sand Effect in Haunted Wasteland
