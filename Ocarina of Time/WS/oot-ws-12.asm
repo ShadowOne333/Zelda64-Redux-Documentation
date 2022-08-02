@@ -69,6 +69,9 @@ li t7, ($F6000000|SCREEN_WIDTH-1 << 14|SCREEN_HEIGHT-1 << 2) //Sun Filter Fill R
 origin $00AD6ECC
 li t0, ($F6000000|SCREEN_WIDTH-1 << 14|SCREEN_HEIGHT-1 << 2) //Weather Effect Background Fill Rectangle
 
+origin $00AD6F4E
+dh 0xF6B7 //Lightning Effect Background Fill Rectangle for Ganon (0xF64F)
+
 origin $00AD6FE6
 dh 0xF6B7 //Lightning Effect Background Fill Rectangle (0xF64F)
 
