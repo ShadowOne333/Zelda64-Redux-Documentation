@@ -47,7 +47,7 @@ ZORA SHOP:
 // 00 12 00 00 08 00 05 54 -> 00 12 00 00 08 06 9A 01
 
 0xC5A6A0 (Makes Scene Z2_BANDROOM use text ID $12):
-02 0A 00 00 02 A0 B8 B0 00 00 00 01 -> 02 0A 00 00 02 A0 B8 B0 00 12 00 01
+02 A0 00 00 02 A0 B8 B0 00 00 00 01 -> 02 A0 00 00 02 A0 B8 B0 00 12 00 01
 0xC5B4D8 (Make the scene use an area title):
 4C 05 01 02 -> 4C 05 41 02
 
@@ -59,7 +59,7 @@ DEKU SCRUB PLAYGROUND:
 0xC5A3C0 (Makes Scene Z2_DEKUTES use text ID $13):
 02 2A 80 00 02 2B 0E 90 00 00 00 01 -> 02 2A 80 00 02 2B 0E 90 00 13 00 01
 0xC5AC98 (Make the scene use an area title):
-1E 00 01 02 -> 1E 01 41 02
+1E 00 01 02 -> 1E 00 41 02
 
 
 LONE PEAK SHRINE (UNKNOWN SCENE/ENTRANCE!):
@@ -121,7 +121,7 @@ The table begins at C5A1E0 in a v1.0 Decompressed ROM.
 From there, we need to look at the table for v1.0:
 https://wiki.cloudmodding.com/mm/Scene_Table/Internal/U_1.0
 
-Locate the Zora Cape Scene in that table, which is entry 35 beginning with 02 6F C0 00 in Hex (Hex search in the ROM, entry at 0xBAA080 in Redux decompressed, changes for vanilla MM).
+Locate the Zora Cape Scene in that table, which is entry 35 beginning with 02 6F C0 00 in Hex (Hex search in the ROM, entry at 0xC5A560 in vanilla MM).
 Once the entry is located, we need to find the message id which calls the title for it, which is 01 34. We modify an unused text title "Great Bay" which goes unused in a cutscene, and put "Zora Cape" in its place.
 
 Now that the Scene entry is modified, we need to change the Entrance table for it, based on this list:
@@ -129,9 +129,9 @@ https://wiki.cloudmodding.com/mm/Entrance_List_(U_1.0)#.2835.29.09Z2_31MISAKI
 
 From there, the part of importance to us to add an area title is the value in the "Variable" column.
 Only the values that have the 3rd bit set (0100, or 0x40 in hex), show up an area title.
-The direct entrance from Coast -> Cape is the first two entries (Index 00 and 01) and their "Variable" 8A values in the table. We need to change those two values to "CA" instead.
+The direct entrance from Coast -> Cape is the first two entries (Index 00 and 01) and their "Variable" 8A values in the table. We need to change those two values to "CA" instead, located at 0xC5B22C.
 
 So now with those two changes, entering the area now shows "Zora Cape" with the proper purple area title.
-Changing the values for Indexes 0A and 0B from 01 to 41 adds the area title from Fairy Fountain -> Zora Cape.
+Changing the values for Indexes 0A and 0B from 01 to 41 adds the area title from Fairy Fountain -> Zora Cape, located at 0xC5B254.
 
 NOTE: Lone Peak Shrine is the shrine in Snowhead where you get the Lens of Truth
