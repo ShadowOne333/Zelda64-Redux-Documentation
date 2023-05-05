@@ -274,7 +274,7 @@ origin $00C0AE28
 lui at, ((SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL) >> 16) //Offset of Second Depth Buffer Upper-Half
 
 origin $00C0AE30
-dh 0x3421, ((SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL) & 0xFFFF) //Offset of Second Depth Buffer Lower-Half
+ori at, at, ((SCREEN_WIDTH*SCREEN_HEIGHT*BYTES_PER_PIXEL) & 0xFFFF) //Offset of Second Depth Buffer Lower-Half
 
 origin $00C0ED00
 addiu t2, r0, SCREEN_WIDTH //Internal Rendering Framebuffer Width
