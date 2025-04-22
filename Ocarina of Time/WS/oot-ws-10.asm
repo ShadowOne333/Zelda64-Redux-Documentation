@@ -129,6 +129,24 @@ addiu t7, r0, SCREEN_WIDTH //Viewport Width of Main Menu
 origin $00B09FBC
 lui at, ($E400|SCREEN_WIDTH >> 2) //Upper-Half of Sepia Effect Texture Rectangle
 
+origin $00B0E742
+dh 0x3FE3 //z_fbdemo_wipe1.c transition width from 4.0f to 16.0f
+
+origin $00B0E746
+dh 0x8E39 //z_fbdemo_wipe1.c transition height from 3.0f to 9.0f
+
+origin $00B0E776
+dh 0x4394 //z_fbdemo_wipe1.c transition scale from 400.0f to 296.0f
+
+origin $00B0ECDE
+dh 0x3FE3 //z_fbdemo_circle.c transition width from 4.0f to 16.0f
+
+origin $00B0ECE2
+dh 0x8E39 //z_fbdemo_circle.c transition height from 3.0f to 9.0f
+
+origin $00B0ED1A
+dh 0x4394 //z_fbdemo_circle.c transition scale from 400.0f to 296.0f
+
 origin $00B124C8 //B670
 li t7, ($80000000|DEFAULT_RAM_SIZE) //Background Texture Address for Pause Screen
 
