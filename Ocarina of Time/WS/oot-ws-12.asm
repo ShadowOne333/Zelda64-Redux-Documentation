@@ -555,5 +555,17 @@ dw ((SCREEN_WIDTH/2)-47 << 14|(SCREEN_HEIGHT/2)-40 << 2) //Upper-Left of Present
 origin $00EB5062
 dh 0xE46A //Song of Storms Effect (0xE450)
 
+origin $00EC3891
+dh 0x9C40 //Epona's Song Effect (0xA640)
+
+origin $00EC3895
+dh 0x9C40 //Epona's Song Effect (0xA640)
+
+origin $00EC4FE1
+dh 0x9C40 //Saria's Song Effect (0xA640)
+
+origin $00EC4FE5
+dh 0x9C40 //Saria's Song Effect (0xA640)
+
 origin $00F6BB10
 dw ($E4000000|SCREEN_WIDTH << 14| SCREEN_HEIGHT << 2) //Texture Rectangle for Sand Effect in Haunted Wasteland
