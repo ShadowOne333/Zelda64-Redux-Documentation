@@ -567,5 +567,11 @@ dh 0x9C40 //Saria's Song Effect (0xA640)
 origin $00EC4FE5
 dh 0x9C40 //Saria's Song Effect (0xA640)
 
+origin $00EF7AE1
+dh 0x9C40 //Scarecrow Song / Zelda Escape Effect (0xA640)
+
+origin $00EF7AE5
+dh 0x9C40 //Scarecrow Song / Zelda Escape Effect (0xA640)
+
 origin $00F6BB10
 dw ($E4000000|SCREEN_WIDTH << 14| SCREEN_HEIGHT << 2) //Texture Rectangle for Sand Effect in Haunted Wasteland
