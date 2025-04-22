@@ -444,6 +444,9 @@ addiu a1, r0, (((SCREEN_WIDTH/2)-88)/8) //X Position of Map Names on Map Select
 origin $00B9F0A0
 addiu a1, r0, ((SCREEN_WIDTH/2)/8) //X Position of OPT=%d Text on Map Select
 
+origin $00B9F102
+dh 0x0010 //X Position of Map Select Loading Messages (0x000A)
+
 origin $00B9F3FC
 addiu t9, r0, SCREEN_WIDTH //Max X Position for Text Rendering on Map Select
 
