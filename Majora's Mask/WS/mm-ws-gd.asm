@@ -374,6 +374,9 @@ addiu a1, r0, (((SCREEN_WIDTH/2)-88) >> 3) //X Position of Stage Names in Zelda 
 origin $00C7BA28
 addiu a1, r0, ((SCREEN_WIDTH-160) >> 3) //X Position of OPT Value on Zelda Map Select
 
+origin $00C7BA8A
+dh 0x0010 //X Position of Map Select Loading Messages (0x000A)
+
 origin $00C7BD78
 addiu a1, r0, ((SCREEN_WIDTH-136) >> 3) //X Position of Day Number on Zelda Map Select
 
@@ -535,8 +538,67 @@ lui at, 0x43C5 //X Position of Right Arrow in Shops (e.g. Bomb Shop)
 origin $00E78ECC //E78ECF --> BD
 lui at, 0x43BD //X Position of Analog Stick Next to Right Arrow in Shops (e.g. Bomb Shop)
 
+origin $00F2B222
+dh 0x3FE3 //z_fbdemo_wipe1.c transition width from 4.0f to 16.0f (0x3FAA)
+
+origin $00F2B226
+dh 0x8E39 //z_fbdemo_wipe1.c transition height from 3.0f to 9.0f (0xAAAB)
+
+origin $00F2B256
+dh 0x4394 //z_fbdemo_wipe1.c transition scale from 400.0f to 296.0f (0x43C8)
+
+origin $00F2C22E
+dh 0x3FE3 //z_fbdemo_wipe3.c transition width from 4.0f to 16.0f (0x3FAA)
+
+origin $00F2C232
+dh 0x8E39 //z_fbdemo_wipe3.c transition height from 3.0f to 9.0f (0xAAAB)
+
+origin $00F2C26A
+dh 0x4394 //z_fbdemo_wipe3.c transition scale from 400.0f to 296.0f (0x43C8)
+
 origin $01126A70
 dw ($E4000000|SCREEN_WIDTH << 14|SCREEN_HEIGHT << 2) //Texture Rectangle for Sand Effect
+
+
+
+origin $00DE93DE
+dh 0x44A3 //Song of Time Effect (0x44AA)
+
+origin $00DE93FA
+dh 0x44A3 //Song of Time Effect (0x44AA)
+
+origin $00DFA6A0
+dw 0x44938000 //Epona's Song Effect (0x44988000)
+
+origin $00DFA6A4
+dw 0x44938000 //Epona's Song Effect (0x44988000)
+
+origin $00DFBDF0
+dw 0x44938000 //Saria's Song Effect (0x44988000)
+
+origin $00DFBDF4
+dw 0x44938000 //Saria's Song Effect (0x44988000)
+
+origin $00E11420
+dw 0x44938000 //Scarecrow Song Effect (0x44988000)
+
+origin $00E11424
+dw 0x44938000 //Scarecrow Song Effect (0x44988000)
+
+origin $0102E180
+dw 0x44938000 //Sonata, Lullaby, Bossa Nova, Elegy and Oath Song Effect (0x44988000)
+
+origin $0102FB20
+dw 0x44938000 //Song of Soaring Effect (0x44988000)
+
+origin $0102FB24
+dw 0x44938000 //Song of Soaring Effect (0x44988000)
+
+origin $01033A30
+dw 0x44938000 //Song of Healing Effect (0x44988000)
+
+origin $01033A34
+dw 0x44938000 //Song of Healing Effect (0x44988000)
 
 
 
