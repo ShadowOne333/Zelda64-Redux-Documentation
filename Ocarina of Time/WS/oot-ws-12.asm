@@ -298,7 +298,7 @@ dw 0x240F00A4 //X Position of Epona Carrots
 
 origin $00B6C814
 dh SCREEN_WIDTH-104 //X Position of Hyrule Field Minimap
-dh SCREEN_WIDTH-104 //X Position of Kakiriko Village Minimap
+dh SCREEN_WIDTH-104 //X Position of Kakariko Village Minimap
 dh SCREEN_WIDTH-102 //X Position of Graveyard Minimap
 dh SCREEN_WIDTH-118 //X Position of Zora's River Minimap
 dh SCREEN_WIDTH-118 //X Position of Kokiri Forest Minimap
@@ -322,7 +322,7 @@ origin $00B6C878
 dh ((108*10)+(((SCREEN_WIDTH-320)*5))) //X Position of Arrows on Hyrule Field Minimap
 
 origin $00B6C880
-dh ((100*10)+(((SCREEN_WIDTH-320)*5))) //X Position of Arrows on Kakiriko Village Minimap
+dh ((100*10)+(((SCREEN_WIDTH-320)*5))) //X Position of Arrows on Kakariko Village Minimap
 
 origin $00B6C888
 dh ((89*10)+(((SCREEN_WIDTH-320)*5))) //X Position of Arrows on Graveyard Minimap
